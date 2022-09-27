@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+
+
+
+
+    <head th:replace="fragments :: page_head('Inicio', 'none')"/>
+    <link rel="stylesheet" type="text/css" th:href="@{front/stylesFront.css}" />
+
+
+    <body>
+
+
+
+        <div th:replace="navigation :: header_menu"></div>
+        <div class="headerProgressBar">
+
+            <div class="progress-container">
+                <div class="progress-bar" id="myBar"></div>
+            </div>
+        </div>
+
+
+        <section class="py-2">
+            <div class="row">
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+            </div>
+        </section>
+
+        <header>
+            <a href="https://api.whatsapp.com/send?phone=+524499031796&text= Hola quisiera recibir más información con un asesor de ventas de Impresores Unidos del Centro." class="float" target="_blank">
+                <i class="fa fa-whatsapp my-float"></i>
+            </a>
+            <!-- This div is  intentionally blank. It creates the transparent black overlay over the video which you can modify in the CSS -->
+            <div class="overlay"></div>
+
+            <!-- The HTML5 video element that will create the background video on the header -->
+            <video autoplay muted loop id="myVideo">
+                <source th:src="@{videos/videoContacto.mp4}" type="video/mp4">
+            </video>
+
+            <!-- The header content -->
+            <div class="container h-100">
+                <div class="d-flex h-100 text-center align-items-center">
+                    <div class="w-100 text-white mt-5">
+                        <h1 class="display-3 mb-5" id="tituloInicio" style="font-family:'Raleway'; color: white">
+                            <span style="font-size: 165%">IMPRESORES</span>
+                            </br>
+                            <span >UNIDOS DEL CENTRO</span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <section class="py-2">
+            <div class="row">
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>                    
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+            </div>
+        </section>
+
+        <div class="container-fluid text-center pt-5 my-5" id="productosTitulo">
+            <h1 style="animation: myAnim 1s ease 0s 9 reverse forwards;">
+                Productos y servicios
+            </h1>
+        </div>
+
+        <section>
+            <div class="row">
+                <div class="column">
+                    <div class="col px-5 py-5">
+                        <div id = "containerCard">
+                            <div class = cardInicio>
+                                <div class = imageInicio>
+                                    <img th:src="@{images/etiquetasMU.png}">
+                                </div>
+                                <div class = contentInicio>
+                                    <h3>Etiquetas</h3>
+                                    <p>Para multiples industrias y diferentes necesidades.</p>
+                                    <a href="/iudc" class="btn btn-primary my-1" id="botonesProductos">Productos disponibles</a>
+                                    <a href="#productosDispo" class="btn btn-primary my-1" id="botonesProductos">Ver más</a>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="col px-5 py-5">
+                        <div id = "containerCard">
+                            <div class = cardInicio>
+                                <div class = imageInicio>
+                                    <img th:src="@{images/ribbonInicio.png}" class="card-img-top" alt="...">
+                                </div>
+                                <div class = contentInicio>
+                                    <h3>Ribbons y cintas termicas</h3>
+                                    <p>Para imprimir y resolver cualquier necesidad</p>
+                                    <a href="/iudc" class="btn btn-primary" id="botonesProductos">Ver Ribbons</a>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="col px-5 py-5">
+                        <div id = "containerCard">
+                            <div class = cardInicio>
+                                <div class = imageInicio>
+                                    <img th:src="@{images/aplicadorInicio.png}" class="card-img-top" alt="...">
+                                </div>
+                                <div class = contentInicio>
+                                    <h3>Aplicadores y equipos</h3>
+                                    <p>Soluciones de etiquetado y codificado con los mejores equipos.</p>
+                                    <a href="#" class="btn btn-primary" id="botonesProductos">Ver más.</a>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="col px-5 py-5">
+                        <div id = "containerCard">
+                            <div class = cardInicio>
+                                <div class = imageInicio>
+                                    <img th:src="@{images/y5.jpeg}" class="card-img-top" alt="...">
+                                </div>
+                                <div class = contentInicio>
+                                    <h3>Servicios</h3>
+                                    <p>Mantenimiento, diseño, herramientas y mentoría.</p>
+                                    <a href="#" class="btn btn-primary" id="botonesProductos">Ver más.</a>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-2">
+            <div class="row">
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container-fluid py-2">
+                <h1 class="text-center" style="color:#169FDB; animation: myAnim 2s ease-in-out 0s infinite reverse forwards;">Trabajemos juntos!</h1>
+            </div>
+            <div id="wrapper">
+                <div id="outer">
+                    <div class="itemwrapper px-4 text-center">
+                        <img th:src="@{images/tinta.png}" class="centerCotiza" id="borderCarrusel">
+                        <div class="col text-center">
+                            <h2 style="color:#FFD000"><a href="/cotizador">Prueba nuestro cotizador</a></h2>
+                        </div>
+                    </div>
+                    <div class="itemwrapper px-4 text-center">
+                        <img th:src="@{images/customer-service.png}" class="centerCotiza" id="borderCarrusel">
+                        <div class="col text-center">
+                            <h2 style="color:#FFD000"><a href="#seccionContacto">Ponte en contacto</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-2">
+            <div class="row">
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>                    
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+            </div>
+        </section>
+
+        <section id="productosDispo">
+            <div class="container-fluid py-2">
+                <h1 class="text-center py-2" style="color:#169FDB ">Productos para multiples sectores</h1>
+            </div>
+
+            <div class="row mx-1" >
+
+                <div class="column">
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/lagerBeerMU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Impresión para bebidas refrigeradas.</br><a class="idProductoInfo" id_info="Impresión para bebidas refrigeradas" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/chocolateMU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Impresión en bolsa de plastico u otros materiales.</br><a class="idProductoInfo" id_info="Impresión para bolsa de plastico u otros materiales." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/moldeMU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Impresión para contenedores plasticos.</br><a class="idProductoInfo" id_info="Impresión para contenedores plasticos." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/farmaMU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas para sector farmacéutico.</br><a class="idProductoInfo" id_info="Etiquetas para sector farmacéutico." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/eggsMU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas para empaque de alimentos.</br><a class="idProductoInfo" id_info="Etiquetas para empaque de alimentos." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/jamonMU1.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas para alimentos refrigerados.</br><a class="idProductoInfo" id_info="Etiquetas para alimentos refrigerados." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/gallon2MU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas especiales para envase plastico.</br><a class="idProductoInfo" id_info="Etiquetas especiales para envase plastico." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="column">
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/WineLabel3.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas para vinos blancos.</br><a class="idProductoInfo" id_info="Etiquetas para vinos blancos." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/bottleJabon.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas de tipo engomado | Productos de higiene.</br><a class="idProductoInfo" id_info="Etiquetas de tipo engomado | Productos de higiene." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/tothPaste.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Impresión en tubo plastico.</br><a class="idProductoInfo" id_info="Impresión en tubo plastico" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/textilMU1.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas textiles.</br><a class="idProductoInfo" id_info="Etiquetas textiles" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/engomadoMU1.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas para productos no perecederos.</br><a class="idProductoInfo" id_info="Etiquetas para productos no perecederos." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/milkLabelMU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas inmold o para envases.</br><a class="idProductoInfo" id_info="Etiquetas inmold o para envases." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/lataMetalMU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas para superficie metalica.</br><a class="idProductoInfo" id_info="Etiquetas para superficie metalica." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/darkBeerMU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas para cerveza.</br><a class="idProductoInfo" id_info="Etiquetas para cerveza." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/chipsMU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Impresión en bolsa.</br><a class="idProductoInfo" id_info="Impresión en bolsa." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/cajaProducto.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Impresión para industria cosmética.</br><a class="idProductoInfo" id_info="Impresion para industria cosmética." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/textilMU2.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetado con carton.</br><a class="idProductoInfo" id_info="Etiquetado con carton." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/bolsaJugo1MU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Impresión en empaque plastico flexible.</br><a class="idProductoInfo" id_info="Impresión en empaque plastico flexible." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/sellosMU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas de 1-2 colores.</br><a class="idProductoInfo" id_info="Etiquetas de 1-2 colores." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/perfumeMU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas para superficie de vidrio. | Durables.</br><a class="idProductoInfo" id_info="Etiquetas para superficie de vidrio. | Durables." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/WineLabel2.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas para vinos rojos.</br><a class="idProductoInfo" id_info="Etiquetas para vinos rojos." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/WineLabel.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF"> 
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas para licores.</br><a class="idProductoInfo" id_info="Etiquetas para licores." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas" th:src="@{images/mokups/boxMU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Impresión en caja.</br><a class="idProductoInfo" id_info="Impresión en caja." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas termoencogibles" th:src="@{images/mokups/termoEncoMU1.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas termoencogibles.</br><a class="idProductoInfo" id_info="Etiquetas termoencogibles." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas termoencogibles" th:src="@{images/mokups/eSeguridad1MU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas de seguridad.</br><a class="idProductoInfo" id_info="Etiquetas de seguridad." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas termoencogibles" th:src="@{images/mokups/ssdMU.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas para electronicos.</br><a class="idProductoInfo" id_info="Etiquetas para electronicos." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+
+                    <div class="containerProductoF">
+                        <img alt="Etiquetas termoencogibles" th:src="@{images/mokups/celanProductMU1.png}" class="imageProductoF" style="width:100%">
+                        <div class="middleProductoF">
+                            <div class="textProductoF" id="textoProductoInfo">Etiquetas durables.</br><a class="idProductoInfo" id_info="Etiquetas durables." data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-solid fa-info-circle"></a></i></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="py-2">
+            <div class="row">
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+            </div>
+        </section>
+
+        <section class="py-2">
+            <div class="container-fluid py-2">
+                <h1 class="text-center py-3">Soluciones modernas para problemas modernos</h1>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="container-fluid py-2">
+                        <div class="w3-content w3-section" style="max-width:500px" id="borderCarrusel">
+                            <img class="mySlides w3-animate-top" th:src="@{images/hpInicio1.png}" style="width:100%"> 
+                            <img class="mySlides w3-animate-bottom" th:src="@{images/gallus2.png}" style="width:100%">
+                            <img class="mySlides w3-animate-top" th:src="@{images/gallus4.png}" style="width:100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="container-fluid py-2">
+                        <div class="w3-content w3-section" style="max-width:500px" id="borderCarrusel">
+                            <img class="mySlides2 w3-animate-top" th:src="@{images/gallusInicio1.png}" style="width:100%"> 
+                            <img class="mySlides2 w3-animate-bottom" th:src="@{images/gallus3.png}" style="width:100%">
+                            <img class="mySlides2 w3-animate-top" th:src="@{images/hp2.png}" style="width:100%">
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-2">
+            <div class="row">
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>                    
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+            </div>
+        </section>
+
+        <section class="bodyContacto" id="seccionContacto" >
+            <div class="container-fluid px-1 py-5 mx-auto" >
+                <div class="row d-flex justify-content-center">
+                    <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center" >
+                        <h1 style="color: #169FDB;" class="text-center my-1">¿No encontraste lo que necesitas? </br> Contáctanos</h1>
+                        <div class="card" >
+
+                            <form class="form-card" action="#" th:action="@{/solInfo}" method="POST">
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-12 flex-column d-flex"><label class="form-control-label px-3">Nombre<span class="text-danger"> *</span></label>
+                                        <input type="text" id="fname" name="nombreContacto" required> 
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Correo<span class="text-danger"> *</span></label>
+                                        <input type="email" id="email" name="email" required> 
+                                    </div>
+                                    <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Telefono<span class="text-danger"> *</span></label>
+                                        <input type="tel" name="telefonoContacto" maxlength="13" required> 
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between text-left">
+                                    <div class="form-group col-12 flex-column d-flex"> <label class="form-control-label px-3">Mensaje<span class="text-danger"> *</span></label> 
+
+                                        <textarea name="mensajeContacto" rows="4" cols="50" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-end">
+                                    <div class="form-group col-sm-12"> <button type="submit" class="btn-block btn-primary" style="background-color: #85CFE7; border-color: #20B2E5">Enviar</button> </div>
+                                </div>
+                                </br>
+                                <div class=" text-center">
+                                    <div > 
+                                        <label class="form-control-label px-3"> <i class="fas fa-solid fa-phone" style="color:#FFD000"></i> Conmutador: <a href="tel:4499621020"  style="color: black;"><u> 449 962 10 20</u></a></label> 
+                                        <label class="form-control-label px-3"> <i class="fas fa-solid fa-envelope" style="color:#CF3650"></i> Correo: <a href = "mailto: el.ventas@iudc.com.mx" style="color: black"><u> el.ventas@iudc.com.mx</u></a></label> 
+                                        <label class="form-control-label px-3"><i class="fas fa-solid fa-headset" style="color:#169FDB"></i> Atención a clientes: <a href="tel:4499031749" style="color: black"><u>449 903 1749</u></a></label> 
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       
+        
+        
+        <div id="divFormModal"></div>
+        
+       <section class="py-2">
+            <div class="row">
+                 
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>                    
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                <div th:replace="front/informacion_productos_modal :: modalContactoInformacion"></div>
+            </div>
+        </section>
+
+        <footer>
+            <div th:replace="navigation :: footer_menu"></div>
+        </footer>
+
+        <script>
+            var myIndex = 0;
+            carousel();
+            textoComentariosProductoInfoModal();
+            mostrarModalInformacion();
+
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                var y = document.getElementsByClassName("mySlides2");
+
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                    y[i].style.display = "none";
+
+                }
+                myIndex++;
+                if (myIndex > x.length && myIndex > y.length) {
+                    myIndex = 1
+                }
+                x[myIndex - 1].style.display = "block";
+                y[myIndex - 1].style.display = "block";
+                setTimeout(carousel, 2500);
+            }
+// When the user scrolls the page, execute myFunction
+            window.onscroll = function () {
+                myFunction()
+            };
+
+            function myFunction() {
+                var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                var scrolled = (winScroll / height) * 100;
+                document.getElementById("myBar").style.width = scrolled + "%";
+            }
+
+            function mostrarModalInformacion(){
+                
+                var equis = document.getElementById("modalInformacion").innerHTML = '<div th:replace="front/informacion_productos_modal :: modalContactoInformacion"></div>';
+                equis();
+            }
+
+            function textoComentariosProductoInfoModal() {
+
+                
+                
+                
+                $(document).ready(function () {
+                    $("#productosDispo").on("click", ".idProductoInfo", function () {
+                        let prodInfoCorreo = $(this).attr("id_info");
+                        $("#txt_cursos").val(prodInfoCorreo);
+                        document.getElementById("productoInfoMensaje").innerHTML =
+                                "Hola quisiera recibir información de: " + prodInfoCorreo;
+                    });
+                });
+            }
+            
+            	function mostrarDivFormModal() {
+                    
+                                var html = "<div th:replace='front/informacion_productos_modal :: modalContactoInformacion'></div>";
+				document.getElementById("divFormModal").innerHTML = html;
+                                
+
+			}
+
+        </script>
+
+    </body> 
+</html>
+

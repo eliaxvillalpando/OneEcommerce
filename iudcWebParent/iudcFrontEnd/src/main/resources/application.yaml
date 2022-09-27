@@ -1,0 +1,35 @@
+server:
+  port: 80
+  servlet:
+    context-path: /iudc    
+spring:
+  datasource:
+    password: mydb2021;*
+    url: jdbc:mysql://localhost:3306/iudc_wf?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show-sql: true
+        
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 1049851842388-hms32ne3m7bbd0m082h9jdioph69qhk1.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+            - email
+            - profile
+    facebook:
+            client-id: 489168046262013
+            client-secret: a6bab8169103c5266ebae0450e51a277
+            scope:
+            - email
+            - public_profile

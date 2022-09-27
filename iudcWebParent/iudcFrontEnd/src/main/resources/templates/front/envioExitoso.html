@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head>
+
+        <title>Impresores Unidos del Centro - Inicio</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+        <link rel="stylesheet" type="text/css" th:href="@{front/stylesFront.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}" />
+        <script src="https://kit.fontawesome.com/62adb77b75.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+        <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}" ></script>
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" ></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    </head>
+    <body>
+
+
+
+
+
+        <div th:replace="navigation :: header_menu"></div>
+
+
+
+
+        <section class="py-2">
+
+            <div class="row">
+
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+            </div>
+
+        </section>
+
+        <section>
+
+            <div class="container-fluid py-2">
+                <h1 class="text-center" style="color:#169FDB;">!Gracias, su mensaje ha sido enviado!</h1>
+                <h2 class="text-center" style="color:#169FDB;">Sera contactado en breve.</h2>
+            </div>
+
+
+            <div id="wrapper">
+                <div id="outer">
+                    <div class="itemwrapper px-4 text-center">
+                        <img th:src="@{images/tinta.png}" class="centerCotiza" id="borderCarrusel">
+                        <div class="col text-center">
+                            <h2 style="color:#FFD000"><a href="/cotizador">Prueba nuestro cotizador</a></h2>
+                        </div>
+                    </div>
+                    <div class="itemwrapper px-4 text-center">
+                        <img th:src="@{images/continuarNavegando.png}" class="centerCotiza" id="borderCarrusel">
+                        <div class="col text-center">
+                            <h2 style="color:#FFD000"><a href="front#productosDispo">Continuar navegando</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+
+        <section class="py-2">
+            <div class="row">
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>                    
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+            </div>
+        </section>
+
+
+
+        <footer>
+            <div th:replace="navigation :: footer_menu"></div>
+        </footer>
+
+
+
+    </body> 
+</html>
+

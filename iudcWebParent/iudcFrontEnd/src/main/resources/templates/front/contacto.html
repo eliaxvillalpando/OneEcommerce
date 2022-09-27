@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+    <head>
+        <title>Impresores Unidos del Centro - Conctato</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link rel="stylesheet" type="text/css" th:href="@{front/contactoCss.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+        <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}" ></script>
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" ></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/62adb77b75.js" crossorigin="anonymous"></script>
+    </head>
+
+    <div th:replace="navigation :: header_menu"></div>
+
+
+    <body>
+
+        <section>
+
+            <div class="containerContador my-5 mx-5">
+
+                <div class="row">
+
+                    <div class="four col-md-3">
+                        <div class="counter-box colored">
+                            <i class="fa fa-thumbs-o-up"></i>
+                            <span class="counter">2147</span>
+                            <p>Happy Customers</p>
+                        </div>
+                    </div>
+                    <div class="four col-md-3">
+                        <div class="counter-box">
+                            <i class="fa fa-group"></i>
+                            <span class="counter">3275</span>
+                            <p>Registered Members</p>
+                        </div>
+                    </div>
+                    <div class="four col-md-3">
+                        <div class="counter-box">
+                            <i class="fa  fa-shopping-cart"></i>
+                            <span class="counter">289</span>
+                            <p>Available Products</p>
+                        </div>
+                    </div>
+                    <div class="four col-md-3">
+                        <div class="counter-box">
+                            <i class="fa  fa-user"></i>
+                            <span class="counter">1563</span>
+                            <p>Saved Trees</p>
+                        </div>
+                    </div>
+                </div>	
+            </div>
+
+        </section>
+
+
+        <section id="bodyPage">
+            <div class="container-fluid py-3">
+                <div class="container py-4" id="fondoContacto">
+                    <div style="text-align:center">
+                        <h2 style="color: black">Contáctanos</h2>
+                        <p style="color: black">¿En qué podemos ayudarte?</p>
+                    </div>
+                    <div class="row">
+
+                        <div class="column">
+                            <form action="/action_page.php" style="font-size: large">
+                                <label for="fname">Nombre <i class="fas fa-thin fa-user-check"></i></label>
+                                <input type="text" id="fname" name="firstname" placeholder="Nombre">
+                                <label for="fname">Empresa <i class="fas fa-thin fa-building"></i></label>
+                                <input type="text" id="fname" name="firstname" placeholder="Empresa">
+                                <label for="lname">Correo <i class="fas fa-thin fa-envelope"></i> </label>
+                                <input type="email" id="lname" name="lastname" placeholder="Email">
+                                <label for="subject">Mensaje <i class="fas fa-thin fa-comment"></i> </label>
+                                <textarea id="subject" name="subject" placeholder="Escribe aqui tu mensaje" style="height:170px"></textarea>
+
+                                <div>
+                                    <label for="attachment">Envianos tu diseño / concepto</label>
+                                    <input type="file" name="attachment"/>
+                                </div>
+
+                                <input type="submit" value="Enviar"> <i style="color:white" class="fas fa-thin fa-paper-plane"></i> 
+
+
+                            </form>
+                        </div>
+
+                        <div class="column pt-5" id="infoContactos">
+
+
+                            <div class="row mx-3" style="border: 1px solid black">
+                                <h3 class="text-center">Información de contacto</h3>
+                                <div class="col pl-3" style="font-size: large">
+                                    <div class="form-group">
+                                        <i class="fas fa-solid fa-phone"></i> Conmutador: <a href="tel:4499621020"  style="color: black;"><u>449 962 10 20</u></a>
+                                    </div>
+                                    <div class="form-group">
+                                        <i class="fas fa-solid fa-people-arrows"></i> Ventas: <a href="tel:4499031796" style="color: black"><u>449 903 1796</u></a>
+                                    </div>
+                                    <div class="form-group">
+                                        <i class="fas fa-solid fa-headset"></i> Atención a clientes: <a href="tel:4499031749" style="color: black"><u>449 903 1749</u></a>
+                                    </div>
+                                    <div class="form-group">
+                                        <i class="fas fa-solid fa-envelope"></i> Correo: <a href = "mailto: el.ventas@iudc.com.mx" style="color: black"><u>el.ventas@iudc.com.mx</u></a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+
+
+        <div th:replace="navigation :: footer_menu"></div>
+
+        <script>
+            $(document).ready(function () {
+
+                $('.counter').each(function () {
+                    $(this).prop('Counter', 0).animate({
+                        Counter: $(this).text()
+                    }, {
+                        duration: 4000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(Math.ceil(now));
+                        }
+                    });
+                });
+
+            });
+        
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,85 @@
+h1 {
+  color: #169FDB;
+  padding: 10px 0;
+  font-family: 'Raleway';
+ 
+}
+
+h5{
+    color: #169FDB;
+    
+}
+
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border: none;
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+  }
+  a {
+    color: initial;
+    &:hover {
+      text-decoration: initial;
+      
+    }
+  }
+  .text-muted i {
+    margin: 0 10px;
+  }
+}
+
+#textoQuienesSomos{
+  font-family: 'Montserrat';
+  
+}
+
+
+/*CSS DE DEL LOGO VIEJO Y NUEVO COMPARACION */
+
+.img-comp-container {
+  position: relative;
+  height: 200px; /*should be the same height as the images*/
+  width: 300px;
+}
+
+.img-comp-img {
+  position: absolute;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+}
+
+.img-comp-img img {
+  display: block;
+  vertical-align: middle;
+}
+
+.img-comp-slider {
+  position: absolute;
+  z-index: 9;
+  cursor: ew-resize;
+  /*set the appearance of the slider:*/
+  width: 40px;
+  height: 40px;
+  background-color: #FFD000;
+  opacity: 0.7;
+  border-radius: 50%;
+}
+
+
+/*Animación del titulo de la pagina*/
+@keyframes animNosotros {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.1);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
