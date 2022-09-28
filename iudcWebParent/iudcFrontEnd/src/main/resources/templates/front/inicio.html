@@ -84,7 +84,7 @@
                                 <div class = contentInicio>
                                     <h3>Etiquetas</h3>
                                     <p>Para multiples industrias y diferentes necesidades.</p>
-                                    <a href="/iudc" class="btn btn-primary my-1" id="botonesProductos">Productos disponibles</a>
+                                    <a href="/iudc/c/Etiquetas" class="btn btn-primary my-1" id="botonesProductos">Productos disponibles</a>
                                     <a href="#productosDispo" class="btn btn-primary my-1" id="botonesProductos">Ver más</a>
                                 </div>
                             </div>    
@@ -393,7 +393,7 @@
                         <div class="w3-content w3-section" style="max-width:500px" id="borderCarrusel">
                             <img class="mySlides w3-animate-top" th:src="@{images/hpInicio1.png}" style="width:100%"> 
                             <img class="mySlides w3-animate-bottom" th:src="@{images/gallus2.png}" style="width:100%">
-                            <img class="mySlides w3-animate-top" th:src="@{images/gallus4.png}" style="width:100%">
+                            <img class="mySlides w3-animate-top" th:src="@{images/img-carrusel.jpg}" style="width:100%">
                         </div>
                     </div>
                 </div>
@@ -402,7 +402,7 @@
                         <div class="w3-content w3-section" style="max-width:500px" id="borderCarrusel">
                             <img class="mySlides2 w3-animate-top" th:src="@{images/gallusInicio1.png}" style="width:100%"> 
                             <img class="mySlides2 w3-animate-bottom" th:src="@{images/gallus3.png}" style="width:100%">
-                            <img class="mySlides2 w3-animate-top" th:src="@{images/hp2.png}" style="width:100%">
+                            <img class="mySlides2 w3-animate-top" th:src="@{images/5.png}" style="width:100%">
                         </div> 
                     </div>
                 </div>
@@ -418,10 +418,10 @@
         </section>
 
         <section class="bodyContacto" id="seccionContacto" >
-            <div class="container-fluid px-1 py-5 mx-auto" >
+            <div class="container-fluid px-1 py-3 mx-auto" >
                 <div class="row d-flex justify-content-center">
                     <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center" >
-                        <h1 style="color: #169FDB;" class="text-center my-1">¿No encontraste lo que necesitas? </br> Contáctanos</h1>
+                        <h1 style="color: #169FDB;" class="text-center my-2">¿No encontraste lo que necesitas? </br> Contáctanos</h1>
                         <div class="card" >
 
                             <form class="form-card" action="#" th:action="@{/solInfo}" method="POST">
@@ -468,15 +468,7 @@
         
         <div id="divFormModal"></div>
         
-       <section class="py-2">
-            <div class="row">
-                 
-                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
-                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>                    
-                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
-                <div th:replace="front/informacion_productos_modal :: modalContactoInformacion"></div>
-            </div>
-        </section>
+     
 
         <footer>
             <div th:replace="navigation :: footer_menu"></div>

@@ -101,6 +101,15 @@
         </div>
 
         <div th:fragment="footer_menu">
+              <section class="">
+            <div class="row">
+                 
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>                    
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                <div th:replace="front/informacion_productos_modal :: modalContactoInformacion"></div>
+            </div>
+        </section>
             <div class="navbar navbar-expand-lg navbar-light" id="fondoFooter">
 
                 <nav >
@@ -119,7 +128,7 @@
                                         <a class="nav-link" href="" style="color: black;">Politica de privacidad</a>
                                     </li>				
                                     <li class="nav-item">
-                                        <a class="nav-link" href="" style="color: black;">Devoluciones &amp; Reembolsos</a>
+                                        <a class="nav-link" th:href="@{/}" style="color: black;">Productos</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="front#seccionContacto" style="color: black;">Contacto</a>

@@ -11,10 +11,9 @@
 <body>
 <div class="container-fluid text-center">
 
-	<div>
+    <div class="my-5">
 		<img th:src="@{/images/iuc_logo.png}" class="img-fluid" />
-	</div>
-	
+    </div>
 	<form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
 		<div th:if="${param.error}">
 			<p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
