@@ -23,10 +23,8 @@
 	.hideable-column { display: table-cell; }
 }
 
-body{
-   
-    font-family: 'Montserrat' ;
-    
+*{
+    font-family: 'Montserrat';
 }
 
 #fondoFooter{
@@ -45,4 +43,16 @@ a:hover {
    border: solid #169FDB !important;
    
    
+}
+
+
+#colorNavBar{
+
+    color: black;
+
+}
+
+#aNav{
+    color: black;
+
 }

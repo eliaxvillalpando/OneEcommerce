@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <body>
         <div th:fragment="header_menu">
-            <nav class="navbar navbar-light navbar-expand-lg">
+            <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" th:href="@{/front}">
 
                     <img th:src="@{${SITE_LOGO}}" />
@@ -155,12 +155,9 @@
        
                         <div class="row py-4">
                             <div class="col pt-2">
-
                                 <p class="text-center mt-3" style="background-color: white; border-radius: 20px;">Con ❤️ Impresores Unidos del Centro
                                 </p>
-
                             </div>
-
                         </div>
         
         <p>[[${COPYRIGHT}]]</p>
