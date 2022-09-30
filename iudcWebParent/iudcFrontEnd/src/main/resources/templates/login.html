@@ -1,62 +1,101 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Impresores Unidos del Centro', 'none')" />
-<body>
-<div class="container-fluid text-center">
-	<div th:replace="navigation :: header_menu"></div>
-	<div>
-		<h2>Iniciar sesión</h2>
-	</div>
-	
-	<div class="mt-3">
-		<a class="btn btn-lg btn-secondary fab fa-google" th:href="@{/oauth2/authorization/google}">&nbsp;&nbsp;Continuar con Google</a>
-	</div>
-	
-	
-        <!--
-        <div class="mt-3">
-		<a class="btn btn-lg btn-secondary fab fa-facebook" th:href="@{/oauth2/authorization/facebook}">&nbsp;&nbsp;Continue with Facebook</a>
-	</div>
-        -->
-        
-        
-	
-	<div>&nbsp;</div>	
-	
-	<form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
-		<div th:if="${param.error}">
-			<p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
-		</div>
-		<div th:if="${param.logout}">
-			<p class="text-warning">Adios!</p>
-		</div>
-		
-		<div class="border border-secondary rounded p-3">
-			<p>
-				<input type="email" name="email" class="form-control" placeholder="Correo" required />
-			</p>
-			<p>
-				<input type="password" name="password" class="form-control" placeholder="Contraseña" required />
-			</p>
-			<p>
-				<input type="checkbox" name="remember-me" />&nbsp;Recuerdame
-			</p>
-			<p>
-				<input type="submit" value="Ingresar" class="btn btn-primary" />
-			</p>			
-		</div>
-	</form>
-	
-	<div>&nbsp;</div>
-	<div>
-		or <a th:href="@{/forgot_password}">Olvidaste tu contraseña?</a>
-	</div>
-	<div>
-		No tienes una cuenta? <a th:href="@{/register}"><b>Registrarse</b></a>
-	</div>
-	<div>&nbsp;</div>
-	
-	<div th:replace="navigation :: footer_menu"></div>
-</div>	
-</body>
+<html>
+    <head th:replace="fragments :: page_head('Impresores Unidos del Centro', 'none')" />
+    <style>
+        body{ height:100vh; margin:0; }
+
+        header{ min-height:50px; }
+        footer{ min-height:50px;  }
+
+        /* Trick */
+        body{ 
+            display:flex; 
+            flex-direction:column; 
+        }
+
+        footer{
+            margin-top:auto; 
+        }
+        h1{
+            color:#169FDB; 
+        }
+
+    </style>
+
+    <body>
+
+        <div class="text-center">
+            <div>
+                <div th:replace="navigation :: header_menu"></div>
+                <section class="py-2">
+                    <div class="row">
+                        <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                        <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                        <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+                    </div>
+                </section>
+
+                <div class="py-5">
+                    <div>
+                        <h1>Iniciar sesión</h1>
+                    </div>
+
+                    <div class="mt-3 text-center py-2">
+                        <a class="btn btn-lg btn-secondary fab fa-google" th:href="@{/oauth2/authorization/google}" style="background-color: #169FDB">&nbsp;&nbsp;Continuar con Google</a>
+                    </div>
+
+
+                    <!--
+                    <div class="mt-3">
+                            <a class="btn btn-lg btn-secondary fab fa-facebook" th:href="@{/oauth2/authorization/facebook}">&nbsp;&nbsp;Continue with Facebook</a>
+                    </div>
+                    -->
+
+
+
+                    <div>&nbsp;</div>	
+
+                    <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
+                        <div th:if="${param.error}">
+                            <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+                        </div>
+                        <div th:if="${param.logout}">
+                            <p class="text-warning">Adios!</p>
+                        </div>
+
+                        <div class="border border-secondary rounded p-3">
+                            <p>
+                                <input type="email" name="email" class="form-control" placeholder="Correo" required />
+                            </p>
+                            <p>
+                                <input type="password" name="password" class="form-control" placeholder="Contraseña" required />
+                            </p>
+                            <p>
+                                <input type="checkbox" name="remember-me" />&nbsp;Recuerdame
+                            </p>
+                            <p>
+                                <input type="submit" value="Ingresar" class="btn btn-primary" />
+                            </p>			
+                        </div>
+                    </form>
+
+                    <div>&nbsp;</div>
+                    <div>
+                        <a th:href="@{/forgot_password}">Olvidaste tu contraseña?</a> <a th:href="@{/forgot_password}" style="color: #CE132D"><b>Recuperar</b></a>
+                    </div>
+                    <div>
+                        No tienes una cuenta? <a th:href="@{/register}"><b style="color: #169FDB">Registrarse</b></a>
+                    </div>
+                    <div>&nbsp;</div>
+
+
+                </div>	
+            </div>
+        </div>
+
+
+        <footer id="footer">
+            <div th:replace="navigation :: footer_menu"></div>
+        </footer>
+    </body>
 </html>
