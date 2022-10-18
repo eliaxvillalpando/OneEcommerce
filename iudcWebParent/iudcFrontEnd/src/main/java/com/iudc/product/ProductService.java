@@ -13,8 +13,8 @@ import com.iudc.common.exception.ProductNotFoundException;
 
 @Service
 public class ProductService {
-	public static final int PRODUCTS_PER_PAGE = 10;
-	public static final int SEARCH_RESULTS_PER_PAGE = 10;
+	public static final int PRODUCTS_PER_PAGE = 12;
+	public static final int SEARCH_RESULTS_PER_PAGE = 12;
 	
 	@Autowired private ProductRepository repo;
 	

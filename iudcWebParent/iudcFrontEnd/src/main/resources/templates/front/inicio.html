@@ -9,7 +9,6 @@
     <head th:replace="fragments :: page_head('Inicio', 'none')"/>
     <link rel="stylesheet" type="text/css" th:href="@{front/stylesFront.css}" />
 
-
     <body>
         <div th:replace="navigation :: header_menu"></div>
         <div class="headerProgressBar">
@@ -462,7 +461,9 @@
         
         <div id="divFormModal"></div>
         
-     
+        
+        <div th:replace="front/informacion_productos_modal :: modalContactoInformacion"></div>
+        
 
         <footer>
             <div th:replace="navigation :: footer_menu"></div>
@@ -473,7 +474,7 @@
             carousel();
             textoComentariosProductoInfoModal();
             mostrarModalInformacion();
-
+  
             function carousel() {
                 var i;
                 var x = document.getElementsByClassName("mySlides");

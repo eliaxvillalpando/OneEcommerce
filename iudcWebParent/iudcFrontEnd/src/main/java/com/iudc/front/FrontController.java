@@ -85,6 +85,14 @@ public class FrontController {
 
     }
     
+     @GetMapping("/test")
+    private String paginaTest(){
+
+        return "front/test";
+
+
+    }
+    
     
 
 }

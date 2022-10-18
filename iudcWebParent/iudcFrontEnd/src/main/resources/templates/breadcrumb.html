@@ -8,7 +8,7 @@
 				<nav>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item">
-							<a th:href="@{/}">Inicio</a>
+							<a th:href="@{/}">Productos</a>
 						</li>
 						
 						<th:block th:each="parent : ${listCategoryParents}">
@@ -20,6 +20,7 @@
 						<li class="breadcrumb-item" th:if="${product != null}">
 							<span>[[${product.shortName}]]</span>
 						</li>
+                                              
 						
 					</ol>
 				</nav>

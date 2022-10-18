@@ -77,7 +77,7 @@
 	</div>	
 	
 	<div id="sectionEmptyCartMessage" th:class="'text-center' + ${#lists.isEmpty(cartItems) ? '' : ' d-none'}" >
-		<h3>You have not chosen any products yet.</h3>
+		<h3>No tienes productos en tu carrito.</h3>
 	</div>
 	
 	<div th:replace="fragments :: modal_dialog"></div>

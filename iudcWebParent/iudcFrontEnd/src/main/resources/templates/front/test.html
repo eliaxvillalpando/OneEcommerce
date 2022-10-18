@@ -67,8 +67,6 @@
 
         }
 
-        
-   
             
         </style>
     
@@ -99,7 +97,7 @@
             <th:block th:each="cat : ${category.children}">
                 <div class="col" th:if="${cat.enabled == true}">
                     <a id="hoverEffect" th:href="@{'/c/' + ${cat.alias}}">
-                        <img th:src="@{${cat.imagePath}}" height="100" width="100"/>
+                        <img th:src="@{${cat.imagePath}}" height="100" />
                         <br/>
                         <b>[[${cat.name}]]</b>
                     </a>
@@ -143,7 +141,6 @@
         
 
          <footer id="footer">
-              
             <div th:replace="navigation :: footer_menu"></div>
         </footer>
 
