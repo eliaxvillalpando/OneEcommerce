@@ -42,10 +42,12 @@
         <div class="text-center m-1" th:if="${totalItems > 0}">
             <span>Mostrando [[${entityName}]]o # [[${startCount}]] al [[${endCount}]] de [[${totalItems}]]</span>
         </div>
-        <div class="text-center m-1" th:unless="${totalItems > 0}">
-            <span>Por el momento no contamos con productos disponibles, por favor, <a th:href="@{/front#seccionContacto}" >contactanos para pedidos.</a>
+        <div class="text-center m-1 py-5" th:unless="${totalItems > 0}">
+            <h2 style="color: #064059" class="py-5">
+            <span>Lo sentimos, por el momento no contamos con productos disponibles, por favor, <a th:href="@{/front#seccionContacto}" ><span style="color: #169FDB">contactanos para pedidos.</span></a>
                 
             </span>
+            </h2>
         </div>
 
         <div th:if="${totalPages > 1}">

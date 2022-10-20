@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" 
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <body>
-        <div th:fragment="header_menu" style="position: sticky; top: 0; z-index: 999; background-color: white;">
-            <nav class="navbar navbar-expand-lg navbar-light">
+        <div th:fragment="header_menu" >
+
+            <nav class="navbar navbar-expand-lg navbar-light" >
                 <a class="navbar-brand" th:href="@{/front}">
 
                     <img th:src="@{${SITE_LOGO}}" />
@@ -24,6 +25,8 @@
                         </li>	
                         <!--th:href="@{/contacto}"-->
 
+
+
                         <th:block sec:authorize="!isAuthenticated()">
                             <li class="nav-item">
                                 <a class="nav-link" th:href="@{/login}" id="aNav">Iniciar sesión</a>
@@ -38,6 +41,10 @@
                         </th:block>
 
 
+
+
+
+
                         <!--
                            <li class="nav-item">
                             <a class="nav-link" id="aNav" th:href="@{/bolsa}">Bolsa de trabajo</a>
@@ -48,8 +55,30 @@
 
                     </ul>
                 </div>
+<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+      
+            <li class="nav-item">
+                       <form class="nav-link form-inline" th:action="@{/search}" method="get">
+                            <input type="search" name="keyword" class="form-control mr-sm-2"
+                                   th:value="${searchKeyword}" 
+                                   placeholder="" required />
+                            <input type="submit" value="Buscar" class="btn btn-outline-success" style="background-color: #169FDB; border: #169FDB; color: white"/>
+                        </form>
+            </li>
+        </ul>
+    </div>
+
 
             </nav>
+
+
+
+
+            <div th:replace="navigation :: search_nav"></div>
+
+
+
         </div>
 
         <div th:fragment="search_nav" class="row" style="color: #169FDB;">
@@ -61,46 +90,54 @@
                     </form>
                 </th:block>
 
-                <nav class="navbar navbar-expand-sm bg-light">
-                    <div class="collapse navbar-collapse" id="searchNavbar">
+                <nav class="navbar navbar-expand-sm" style="background-color: white;">
+                    <div  id="searchNavbar">
+                        
+                        <!--
                         <form class="form-inline" th:action="@{/search}" method="get">
                             <input type="search" name="keyword" class="form-control mr-sm-2"
                                    th:value="${searchKeyword}" 
                                    placeholder="" required />
                             <input type="submit" value="Buscar" class="btn btn-outline-success" style="background-color: #169FDB; border: #169FDB; color: white"/>
                         </form>
-                        <ul class="navbar-nav">						
-                            <th:block sec:authorize="isAuthenticated()">
-                                <li class="nav-item">
-                                    <b><a class="nav-link" th:href="@{/account_details}" 
-                                          sec:authentication="principal.fullName"></a></b>
-                                </li>
+                        -->
+                        
+                        
+                        <div class="collapse navbar-collapse">
+                            <ul class="navbar-nav">						
+                                <th:block sec:authorize="isAuthenticated()">
+                                    <li class="nav-item">
+                                        <b><a class="nav-link" th:href="@{/account_details}" 
+                                              sec:authentication="principal.fullName"></a></b>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/address_book}">Direcciones</a>
-                                </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="">Preguntas</a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/address_book}">Direcciones</a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/reviews}">Reseñas</a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="">Preguntas</a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/orders}">Ordenes</a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/reviews}">Reseñas</a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link fas fa-shopping-cart fa-2x" th:href="@{/cart}"></a>
-                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" th:href="@{/orders}">Ordenes</a>
+                                    </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="javascript: document.logoutForm.submit()">Salir</a>
-                                </li>					
-                            </th:block>						
-                        </ul>				
+                                    <li class="nav-item">
+                                        <a class="nav-link fas fa-shopping-cart fa-2x" th:href="@{/cart}"></a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript: document.logoutForm.submit()">Salir</a>
+                                    </li>					
+                                </th:block>						
+                            </ul>				
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -177,8 +214,6 @@
         
         
         -->
-
-
 
 
 

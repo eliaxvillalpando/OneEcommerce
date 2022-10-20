@@ -1,18 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: page_head('Detalles de Cuenta', 'none')" />
-<body>
-<div class="container-fluid">
-	<div th:replace="navigation :: header_menu"></div>
-	<div>&nbsp;</div>
+  <style>
+        body{ height:100vh; margin:0; }
 
-	<div class="text-center">
+        header{ min-height:50px; }
+        footer{ min-height:50px;  }
+
+        /* Trick */
+        body{ 
+            display:flex; 
+            flex-direction:column; 
+        }
+
+        footer{
+            margin-top:auto; 
+        }
+        h2{
+            color:#169FDB; 
+        }
+
+    </style>
+<body>
+
+	<div th:replace="navigation :: header_menu"></div>
+        
+        <div th:replace="navigation :: search_nav"></div>
+	
+   <section class="">
+            <div class="row">
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+            </div>
+        </section>
+        
+        
+	<div class="text-center py-2">
 		<h2>Detalles de tu cuenta</h2>
 	</div>
-	<div>&nbsp;</div>
+        
 
 	<form th:action="@{/update_account_details}" method="post" th:object="${customer}"
-		style="max-width: 600px; margin: 0 auto">
+              style="max-width: 600px; margin: 0 auto" class="py-2">
 		<input type="hidden" th:field="*{id}" />
 	<div th:if="${message != null}" class="alert alert-success text-center">
 		[[${message}]]
@@ -135,8 +165,9 @@
 	</div>
 	</form>
 		
-	<div th:replace="navigation :: footer_menu"></div>
-</div>
+	 <footer id="footer">
+            <div th:replace="navigation :: footer_menu"></div>
+        </footer>
 <script type="text/javascript">
 	contextPath = "[[@{/}]]";
 </script>
