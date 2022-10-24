@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <html>
+        <head th:replace="fragments :: page_head('Aviso de privacidad', 'none')" />
+        <style>
+            body{ height:100vh; margin:0; }
+
+            header{ min-height:50px; }
+            footer{ min-height:50px;  }
+
+            /* Trick */
+            body{ 
+                display:flex; 
+                flex-direction:column; 
+            }
+
+            footer{
+                margin-top:auto; 
+            }
+            h1,h2,h3{
+                color:#169FDB; 
+            }
+
+        </style>
+        <body>
+
+
+            <div th:replace="navigation :: header_menu"></div>
+            <section class="py-2">
+                <div class="row">
+                    <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                    <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                    <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+                </div>
+            </section>
+
+            
+            <h1 class="text-center py-3"> Política de Privacidad Impresores Unidos Del Centro </h1>
+
+           
+                
+                
+           <div class="row">
+  
+  <div class="col py-2 px-5 text-justify">
+      
+      De acuerdo con el Articulo 17 de la Ley Federal de Protección de datos Personales en Posesión de los Particulares, en lo sucesivo “la ley”, hacemos de su conocimiento que Impresores Unidos Del Centro S.A DE C.V., en lo sucesivo “El responsable”, con domicilio en Calle Jesús María Romo, numero 117 interior A, Fracc. Ciudad Industrial, municipio de Aguascalientes, código postal 20290 en México, Estado de Aguascalientes, pone a su disposición el siguiente aviso de privacidad. Los datos personales proporcionados por “el titular” directamente o a través de medios electrónicos a “el responsable” han sido recabados y serán tratados bajo los principios de licitud, consentimiento, información, calidad, finalidad, lealtad, proporcionado y responsabilidad de conformidad con lo dispuesto por “la ley” “El responsable” hace de su conocimiento que los datos personales proporcionados por “el titular” serán utilizados para: 
+      </br>
+      <li type="square" class="pt-2"> Identificación y actualización de nuestro sistema de ventas.</li>
+<li type="square"> Estadísticos y de análisis interno.</li>
+<li type="square"> Información para contacto.</li>
+<li type="square"> Relación comercial.</li>
+<li type="square"> Reclutamiento de personal.</li>
+<li type="square"> Prestar servicios que pudieran llegar a ser o hayan sido contratados.</li>
+<li type="square"> Contactarlo vía correo electrónico y/o teléfono en relación a los fines antes mencionados.</li>
+<li type="square"> Informar sobre cambios o nuevos productos y/o servicios.</li>
+<li type="square" class="pb-2"> Cumplimiento de obligaciones contraídas o derivadas de contratos celebrados a requerimientos de la autoridad </li>
+Los datos personales podrán incluir de manera enunciativa, lo siguiente: nombre, domicilio, teléfono y correo electrónico. </br>
+Para modificación o aclaración de sus datos personales mande un correo a 
+la siguiente dirección:  El “responsable” no recaba datos personales sensibles. No obstante, si fuera el caso, se obtendrá el consentimiento 
+expreso y por escrito del titular para su tratamiento. El “responsable” podrá transferir los datos personales 
+que obren en su base de datos a cualesquiera de las empresas del grupo e incluso a terceras personas, 
+nacionales o extranjeras, salvo que “el titular” manifieste expresamente su oposición, en los términos de “la ley”. 
+El receptor de los datos personales transferidos de acuerdo con el articulo 36 de “la ley”, tendrá las mismas obligaciones que “el responsable”. 
+“El responsable” se reserva el derecho de modificar o actualizar el presente aviso de privacidad, informándole “al titular” de los cambios mediante su página web: iudc.com.mx
+
+  </div>
+  
+</div>
+</br>                
+                
+                
+             <footer id="footer">
+            <div th:replace="navigation :: footer_menu"></div>
+        </footer>
+
+        </body>
+    </html>

@@ -30,9 +30,15 @@
       <!-- Fin de reviews de los productos, se quita hasta tener ventas-->
       
       
-	<div th:replace="product/product_fragment :: product_price"></div>
+      <!--Se comenta la parte del precio hasta tener indicaciones o precios para cargar 21 Octubre.-->
+	<!--<div th:replace="product/product_fragment :: product_price"></div>-->
+        
+        
+        
 </div>
 
+    
+    
 <div th:fragment="product_price" th:remove="tag">
 	<th:block th:if="${product.discountPercent &lt;= 0}">
 		<div th:replace="product/product_fragment :: price_fragment(${product.price})"></div>

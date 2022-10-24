@@ -10,9 +10,7 @@
 <body>
 
     <div th:replace="navigation :: header_menu"></div>
-    <div th:replace="navigation :: search_nav"></div>
-    <div th:replace="breadcrumb :: content"></div>
-
+    <!--<div th:replace="navigation :: search_nav"></div>-->
     <section class="py-1">
         <div class="row">
             <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
@@ -20,6 +18,9 @@
             <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
         </div>
     </section>
+    <div th:replace="breadcrumb :: content"></div>
+
+
 
     <div class="row py-3">
         <div class="col-sm">
@@ -40,7 +41,7 @@
         </div>
         <div class="col-sm">
             <div>
-                <h2>[[${product.name}]]</h2>
+                <h2 th:value="${id}" id="yourId">[[${product.name}]]</h2>
             </div>
             <!--
                 <div class="row ml-1">
@@ -58,11 +59,24 @@
                 </div>
             
             -->
+            
+            <!-- SE COMENTA PRECIO DE VENTA HASTA TENER LOS PRECIOS CORRECTOS DE TODOS LOS PRODUCTOS 24/OCTUBRE/2022
             <h4 class="py-4">
                 Precio de venta:
                 <span th:if="${product.discountPercent <= 0}"><div th:replace="product/product_fragment :: price_fragment(${product.price})"></div></span>
                 <del th:if="${product.discountPercent > 0}"><span><div th:replace="product/product_fragment :: price_fragment(${product.price})"></div></span></del>
             </h4>
+            -->
+            
+            <div id="productosPreg" onclick="testComentarios()" class="py-4">
+                <h4 style="color: #169FDB"><a class="idProductoInfo" data-toggle="modal" data-target="#exampleModalCenter">
+                        Solicitar información de este producto.
+                        <i class="fas fa-solid fa-info-circle"></i>
+                    </a>
+                </h4>
+            </div>
+
+
             <div th:if="${product.discountPercent > 0}">
                 Precio:
                 <span style="font-size: larger; color: darkred"><div th:replace="product/product_fragment :: price_fragment(${product.discountPrice})"></div></span>
@@ -77,13 +91,17 @@
                 <span th:unless="${product.inStock}" class="text-danger"><b>No Disponible</b></span>
             </div>
 
-            <th:block th:if="${product.inStock}">
-                <div th:replace="cart/quantity_control :: quantity_control(1, ${product.id})"></div>
-                <div class="mt-3">
-                    <input type="button" value="Añadir al carrito" id="buttonAdd2Cart" class="btn btn-primary" />
-                </div>
-            </th:block>
+            <!--
+      Se comenta añadir al carrito hata indicaciones de precio o carga de precios
+                  <th:block th:if="${product.inStock}">
+                      <div th:replace="cart/quantity_control :: quantity_control(1, ${product.id})"></div>
+                      <div class="mt-3">
+                          <input type="button" value="Añadir al carrito" id="buttonAdd2Cart" class="btn btn-primary" />
+                      </div>
+                  </th:block>
+            -->
         </div>
+
     </div>
 
     <div class="row text-center py-3">
@@ -110,8 +128,8 @@
             </th:block>
         </div>
     </div>
-    
-    
+
+
     <!--
     
     Reseñas y calificaciones, se retira hasta tener ventas en el sitio 13/10/2022
@@ -120,14 +138,19 @@
     
     
     -->
-    
-    
-    
+
+
+
     <div th:replace="product/images_carousel :: content"></div>
     <div th:replace="fragments :: modal_dialog"></div>	
     <div th:replace="navigation :: footer_menu"></div>
 
+    <div id="divFormModal"></div>
+    <div th:replace="front/informacion_productos_modal :: modalContactoInformacion"></div>
+
     <script type="text/javascript">
+
+
         contextPath = "[[@{/}]]";
         productId = "[[${product.id}]]";
         var csrfHeaderName = "[[${_csrf.headerName}]]";
@@ -153,6 +176,32 @@
                 $("#carouselExampleIndicators").carousel(imageIndex);
             });
         });
+
+
+        function mostrarModalInformacion() {
+
+            var equis = document.getElementById("modalInformacion").innerHTML = '<div th:replace="front/informacion_productos_modal :: modalContactoInformacion"></div>';
+            equis();
+        }
+
+
+
+        function testComentarios() {
+
+            document.getElementById("productoInfoMensaje").innerHTML =
+                    "Hola quisiera recibir información de: " + "[[${product.name}]]";
+
+        }
+
+
+        function mostrarDivFormModal() {
+
+            var html = "<div th:replace='front/informacion_productos_modal :: modalContactoInformacion'></div>";
+            document.getElementById("divFormModal").innerHTML = html;
+
+
+        }
+
 
     </script>
     <script type="text/javascript" th:src="@{/js/jquery.number.min.js}"></script>

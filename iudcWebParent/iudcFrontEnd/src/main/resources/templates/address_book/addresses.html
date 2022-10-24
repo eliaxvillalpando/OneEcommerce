@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('Your Address Book', 'none')" />
+<head th:replace="fragments :: page_head('Direcciones', 'none')" />
+    <style>
+        body{ height:100vh; margin:0; }
+
+        header{ min-height:50px; }
+        footer{ min-height:50px;  }
+
+        /* Trick */
+        body{ 
+            display:flex; 
+            flex-direction:column; 
+        }
+
+        footer{
+            margin-top:auto; 
+        }
+        h1,h2,h3,h4,a{
+            color:#169FDB; 
+        }
+
+    </style>
+
+
+
+
+
 <body>
-<div class="container-fluid" th:with="redirectedFromCheckoutPage = ${param.redirect != null && param.redirect[0] == 'checkout'}">
+<div  th:with="redirectedFromCheckoutPage = ${param.redirect != null && param.redirect[0] == 'checkout'}">
 	<div th:replace="navigation :: header_menu"></div>
-	<div th:replace="navigation :: search_nav"></div>
+               <section class="py-2">
+                    <div class="row">
+                        <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                        <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                        <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+                    </div>
+                </section>
+	<!--<div th:replace="navigation :: search_nav"></div>-->
 	
-	<div class="text-center">
-		<div><h2 th:text="${redirectedFromCheckoutPage} ? 'Choose a Shipping Address' : 'Your Address Book'"></h2></div>
+	<div class="text-center py-3">
+		<div><h2 th:text="${redirectedFromCheckoutPage} ? 'Selecciona una dirección' : 'Direcciones guardadas'"></h2></div>
 		<div>
 			<a th:unless="${param.redirect}" th:href="@{/address_book/new}" class="h4">Nueva dirección</a>
 			<a th:if="${redirectedFromCheckoutPage}" th:href="@{/address_book/new(redirect=checkout)}" class="h4">Nueva dirección</a>
@@ -97,7 +129,10 @@
 	</div>
 	<div>&nbsp;</div>
 	<div th:replace="fragments :: confirm_modal"></div>
-	<div th:replace="navigation :: footer_menu"></div>
+        
+        
+    
+        
 </div>	
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -114,7 +149,14 @@
 		$("#confirmText").text("Deseas eliminar "
 								 + entityName + " ID " + entityId + "?");
 		$("#confirmModal").modal();	
-	}	
+	}
+        
+        
 </script>
+
+    <footer id="footer">
+            <div th:replace="navigation :: footer_menu"></div>
+        </footer>
+        
 </body>
 </html>

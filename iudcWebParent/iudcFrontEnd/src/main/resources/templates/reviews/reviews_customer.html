@@ -1,11 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: page_head('My Reviews', 'none')" />
+    <style>
+        body{ height:100vh; margin:0; }
+
+        header{ min-height:50px; }
+        footer{ min-height:50px;  }
+
+        /* Trick */
+        body{ 
+            display:flex; 
+            flex-direction:column; 
+        }
+
+        footer{
+            margin-top:auto; 
+        }
+        h1,h2,h3{
+            color:#169FDB; 
+        }
+
+    </style>
+
+
+
+
 <body>
-<div class="container-fluid">
+
 	<div th:replace="navigation :: header_menu"></div>
-	<div th:replace="navigation :: search_nav"></div>
-	<div class="text-center">
+        
+                    <section class="py-2">
+                    <div class="row">
+                        <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                        <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                        <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+                    </div>
+                </section>
+        
+        
+	<!--<div th:replace="navigation :: search_nav"></div>-->
+	<div class="text-center py-4">
 		<h2>Mis reseñas</h2>	
 	</div>
 		
@@ -13,7 +47,7 @@
 	
 	<div class="full-details">
 		<table class="table table-bordered table-striped table-hover table-responsive-xl">
-			<thead class="thead-dark">
+                    <thead style="background-color: #20B2E5">
 				<tr>
 					<th th:replace="fragments :: column_link('id', 'ID', 'none')" />
 					<th th:replace="fragments :: column_link('product', 'Producto', 'none')" />
@@ -68,7 +102,7 @@
 		</div>	
 	</div>		
 	
-	<div th:replace="fragments :: pagination('/reviews', 'reviews')"></div>
+	<div th:replace="fragments :: pagination('/reviews', 'reseñas')"></div>
 
 	<div class="modal fade" id="reviewDetailModal">
 		<div class="modal-dialog modal-lg">
@@ -77,9 +111,12 @@
 		</div>
 	</div>	
 		
-	<div th:replace="navigation :: footer_menu"></div>
 	
-</div>
+        <footer>
+            <div th:replace="navigation :: footer_menu"></div>
+        </footer>
+
+	
 <script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
 	moduleURL = "[[@{/reviews}]]";

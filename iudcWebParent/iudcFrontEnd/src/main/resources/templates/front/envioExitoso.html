@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-    <head>
 
-        <title>Impresores Unidos del Centro - Inicio</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
-        <link rel="stylesheet" type="text/css" th:href="@{front/stylesFront.css}" />
-        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
-        <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}" />
-        <script src="https://kit.fontawesome.com/62adb77b75.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
-        <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}" ></script>
-        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" ></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    </head>
+    <head th:replace="fragments :: page_head('Impresores Unidos del Centro', 'none')" />
+    <link rel="stylesheet" type="text/css" th:href="@{front/stylesFront.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+
+    <style>
+        body{ height:100vh; margin:0; }
+
+        header{ min-height:50px; }
+        footer{ min-height:50px;  }
+
+        /* Trick */
+        body{ 
+            display:flex; 
+            flex-direction:column; 
+        }
+
+        footer{
+            margin-top:auto; 
+        }
+        h1{
+            color:#169FDB; 
+        }
+
+    </style>
+
     <body>
 
 
@@ -68,23 +77,9 @@
 
         </section>
 
-
-
-        <section class="py-2">
-            <div class="row">
-                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
-                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>                    
-                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
-            </div>
-        </section>
-
-
-
-        <footer>
+        <footer id="footer">
             <div th:replace="navigation :: footer_menu"></div>
         </footer>
-
-
 
     </body> 
 </html>

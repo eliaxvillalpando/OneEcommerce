@@ -93,6 +93,12 @@ public class FrontController {
 
     }
     
-    
+       @GetMapping("/politica-privacidad")
+    private String paginaPolitica(){
+
+        return "front/politicaPrivacidad";
+
+
+    }
 
 }

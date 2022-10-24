@@ -40,7 +40,7 @@
 
     <div th:fragment="pagination(moduleURL, entityName)" th:remove="tag">
         <div class="text-center m-1" th:if="${totalItems > 0}">
-            <span>Mostrando [[${entityName}]]o # [[${startCount}]] al [[${endCount}]] de [[${totalItems}]]</span>
+            <span>Mostrando [[${entityName}]] # [[${startCount}]] al [[${endCount}]] de [[${totalItems}]]</span>
         </div>
         <div class="text-center m-1 py-5" th:unless="${totalItems > 0}">
             <h2 style="color: #064059" class="py-5">
@@ -133,7 +133,7 @@
             <input type="hidden" name="sortField" th:value="${sortField}" />
             <input type="hidden" name="sortDir" th:value="${sortDir}" />
 
-            Filter:&nbsp;
+            Buscar:&nbsp;
             <input type="search" name="keyword" th:value="${keyword}" class="form-control" required/>
             &nbsp;&nbsp;
             <button type="submit" class="btn btn-primary">
