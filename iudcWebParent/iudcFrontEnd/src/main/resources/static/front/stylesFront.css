@@ -365,7 +365,7 @@ figcaption{
 }
 
 .middleProductoF {
-    transition: 3s ease;
+    transition: .25s ease;
     opacity: 0;
     position: absolute;
     top: 50%;
@@ -532,3 +532,4 @@ button:focus{
     background-color: #169FDB;
     border:#169FDB;
 }
+

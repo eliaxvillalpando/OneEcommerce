@@ -73,7 +73,6 @@ public class BrandRepositoryTests {
 	@Test
 	public void testGetById() {
 		Brand brand = repo.findById(1).get();
-		
 		assertThat(brand.getName()).isEqualTo("Acer");
 	}
 	

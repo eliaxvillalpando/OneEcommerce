@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="content" class="col-sm-2">
-	<div>
+<div th:fragment="content" class="col">
+    <div>
 		<a id="hoverEffect" th:href="@{'/p/' + ${product.alias}}">
-			<img th:src="@{${product.mainImagePath}}" width="350" />
+                    <img th:src="@{${product.mainImagePath}}" width="350" class="py-1 px-1"/>
 			<br/>
-			<b>[[${product.shortName}]]</b>
+			<b  class="py-1 px-1">[[${product.shortName}]]</b>
+                        
+                   
 		</a>
+            
+             
 	</div>
     
     
@@ -30,7 +34,7 @@
       <!-- Fin de reviews de los productos, se quita hasta tener ventas-->
       
       
-      <!--Se comenta la parte del precio hasta tener indicaciones o precios para cargar 21 Octubre.-->
+      <!--Se ve mejor sin precio 17 Nov-->
 	<!--<div th:replace="product/product_fragment :: product_price"></div>-->
         
         

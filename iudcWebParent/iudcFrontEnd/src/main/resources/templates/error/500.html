@@ -2,14 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: page_head('Internal Server Error - iudc', 'none')" />
 </head>
+<style>
+            body{ height:100vh; margin:0; }
+
+            header{ min-height:50px; }
+            footer{ min-height:50px;  }
+
+            /* Trick */
+            body{ 
+                display:flex; 
+                flex-direction:column; 
+            }
+
+            footer{
+                margin-top:auto; 
+            }
+            h1,h2,h3{
+                color:#169FDB; 
+            }
+
+        </style>
 <body>
 <div class="container-fluid">
 	<div th:replace="navigation :: header_menu"></div>
+        
+        <section class="">
+            <div class="row">
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+            </div>
+        </section>
+        
 	<div class="m-3">
 		<h2>Lo sentimos, hubo un error al procesar tu solicitud.</h2>
 	</div>
 
-	<div th:replace="navigation :: footer_menu"></div>
+	    <footer>
+            <div th:replace="navigation :: footer_menu"></div>
+        </footer>
 	
 </div>
 </body>

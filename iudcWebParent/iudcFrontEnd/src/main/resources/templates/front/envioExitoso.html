@@ -63,13 +63,13 @@
                     <div class="itemwrapper px-4 text-center">
                         <img th:src="@{images/tinta.png}" class="centerCotiza" id="borderCarrusel">
                         <div class="col text-center">
-                            <h2 style="color:#FFD000"><a href="/cotizador">Prueba nuestro cotizador</a></h2>
+                            <h2 style="color:#FFD000"><a th:href="@{/productos}">Productos disponibles</a></h2>
                         </div>
                     </div>
                     <div class="itemwrapper px-4 text-center">
                         <img th:src="@{images/continuarNavegando.png}" class="centerCotiza" id="borderCarrusel">
                         <div class="col text-center">
-                            <h2 style="color:#FFD000"><a href="front#productosDispo">Continuar navegando</a></h2>
+                            <h2 style="color:#FFD000"><a th:href="@{front/#productosDispo}">Continuar navegando</a></h2>
                         </div>
                     </div>
                 </div>

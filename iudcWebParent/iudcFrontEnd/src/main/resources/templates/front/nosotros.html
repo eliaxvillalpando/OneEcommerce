@@ -191,6 +191,25 @@
             }
         }
         
+            body{ height:100vh; margin:0; }
+
+            header{ min-height:50px; }
+            footer{ min-height:50px;  }
+
+            /* Trick */
+            body{ 
+                display:flex; 
+                flex-direction:column; 
+            }
+
+            footer{
+                margin-top:auto; 
+            }
+            h1,h2,h3{
+                color:#169FDB; 
+            }
+
+        
 
 
     </style>
@@ -223,8 +242,25 @@
             <div class="text-center py-1" style="animation: animNosotros 14s ease 0s 1 normal forwards;">
                 <h1>¿Quiénes somos?</h1>
             </div>
+            
+            
 
             <div class="container" id="textoQuienesSomos">
+                
+                <div class="card" style="animation: abajo 2s ease 0s 1 normal forwards;">
+                    <!--<img class="card-img-top" th:src="@{images/nosotros/pantone.jpeg}" alt="Card image cap">-->
+
+                    <video autoplay muted loop id="myVideo" class="card-img-top">
+                        <source th:src="@{images/nosotros/iudcInfoNew.mp4}" type="video/mp4">
+                    </video>
+                    <div class="card-body">
+                        <h5 class="card-title">Empresa dedicada al diseño, fabricación y soluciones de etiquetado y codificado. <a th:href="@{/carta/Impresores-CartaPresentacion.pdf}" target="_blank" style="color: #FFD000">Ver carta presentación</a> </h5>
+                        <!--<p class="card-text"></p>-->
+
+                    </div>
+
+                </div>
+                
                 <div class="card-columns">
                     <div class="card" style="animation: myAnim 2s ease 0s 1 normal forwards;">
 
@@ -313,19 +349,6 @@
                         </div>
                     </div>
                 -->
-                <div class="card" style="animation: abajo 2s ease 0s 1 normal forwards;">
-                    <!--<img class="card-img-top" th:src="@{images/nosotros/pantone.jpeg}" alt="Card image cap">-->
-
-                    <video autoplay muted loop id="myVideo" class="card-img-top">
-                        <source th:src="@{images/nosotros/iudcInfoNew.mp4}" type="video/mp4">
-                    </video>
-                    <div class="card-body">
-                        <h5 class="card-title">Queremos ser tu proveedor de etiquetas y soluciones.</h5>
-                        <!--<p class="card-text"></p>-->
-
-                    </div>
-
-                </div>
 
             </div>
         </div>

@@ -62,7 +62,8 @@ public class SettingController {
 			String value = "/site-logo/" + fileName;
 			settingBag.updateSiteLogo(value);
 			
-			String uploadDir = "../site-logo/";
+			//String uploadDir = "../site-logo/"; --> funciona localmente, en server no
+                        String uploadDir = "site-logo";
 			FileUploadUtil.cleanDir(uploadDir);
 			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 		}

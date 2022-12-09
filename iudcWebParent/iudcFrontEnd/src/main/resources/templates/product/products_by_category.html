@@ -115,18 +115,17 @@
 
 
 
-        <div class="rowz mx-1 my-2" >
+        <div class="rowz mx-1 my-2 text-center" >
 
             <div class="columnz" th:each="product : ${listProducts}"> 
 
-                <div class="containerProductoF text-center">
+                <div class="containerProductoF ">
                     <div th:replace="product/product_fragment :: content"></div>
                 </div>
 
 
 
             </div>
-
 
         </div>
 

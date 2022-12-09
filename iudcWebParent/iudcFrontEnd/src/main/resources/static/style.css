@@ -27,17 +27,6 @@
     font-family: 'Montserrat';
 }
 
-#fondoFooter{
-    
-    /*border-top: 1px solid lightslategrey;*/
-    
-    background-image: url(footerBackGr.png);
-    max-height: 90%;
-    background-repeat:no-repeat;
-    background-size: cover;
-    
-    
-}
 a:hover {
    
    border: solid #169FDB !important;

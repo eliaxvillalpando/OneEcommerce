@@ -14,10 +14,19 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
         exposeDirectory("../category-images", registry);
         exposeDirectory("../brand-logos", registry);
         exposeDirectory("../product-images", registry);
         exposeDirectory("../site-logo", registry);
+
+    /*
+        exposeDirectory("category-images", registry);
+        exposeDirectory("brand-logos", registry);
+        exposeDirectory("product-images", registry);
+        exposeDirectory("site-logo", registry);
+        */
+    
     }
 
     private void exposeDirectory(String pathPattern, ResourceHandlerRegistry registry) {
@@ -28,7 +37,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
         registry.addResourceHandler(logicalPath)
                 .addResourceLocations("file:" + absolutePath + "/");
-        //en windows probablemente --> .addResourceLocations("file:/" + absolutePath + "/");
+        
     }
 
     @Bean

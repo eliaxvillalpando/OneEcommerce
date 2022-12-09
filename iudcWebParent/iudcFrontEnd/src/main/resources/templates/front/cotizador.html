@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+    <head th:replace="cotizador/detallesComponentes :: page_cotizador('Cotizador', 'none')"/>
+    
+    <style>
+
+        header{ min-height:50px; }
+        footer{ min-height:50px;  }
+
+        /* Trick */
+        body{ 
+            height:100vh; margin:0;
+            display:flex; 
+            flex-direction:column; 
+        }
+
+        footer{
+            margin-top:auto; 
+        }
+        h1,h2,h3{
+            color:#169FDB; 
+        }
+
+        #a {
+            width: 576px;
+            height: 384px;
+            background-color: #20B2E5;
+        }
+
+
+
+
+    </style>
+
+
+    <script type="text/javascript" th:src="@{/front/ScriptCotizador.js}" ></script>
+    <link rel="stylesheet" type="text/css" th:href="@{front/stylesCotizador.css}" />
+
+    <body>
+        <div class="header">
+
+            <div class="progress-container">
+                <div class="progress-bar" id="myBar"></div>
+            </div>
+        </div>
+
+
+
+
+        <div th:replace="navigation :: header_menu"></div>
+
+
+        <section class="">
+            <div class="row">
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+            </div>
+        </section>
+
+
+
+        <section>
+            <div class="container-fluid">
+                <h1 class="text-center py-5" id="tituloCotizador" >Cotizador de etiquetas</h1>
+            </div>
+        </section>
+
+
+
+        <form action="datosCapturados" onsubmit="return validateForm()" name="formCotizador" method="GET">
+
+
+            <div th:replace="cotizador/detallesComponentes :: aplicacionEtiqueta"></div>
+            <div th:replace="cotizador/detallesComponentes :: conImpresion"></div>
+
+            <div id="seccionesFormulario"><div id="capturaDiseñoCliente"></div> </div>
+
+            <div th:replace="cotizador/detallesComponentes :: formaEtiquetas" id="seccionFormaEtiqueta"></div>
+
+
+            <div class="col" id="seccionesFormulario">
+                <div class="container-fluid mt-3 mb-3">
+
+                    <div class="row mt-5" id="destinoPaso2">
+
+                        <div class="row" id="capturaFormaRegular">
+                            <h2 class="mt-3 text-center" id="tituloMedidas">Medidas</h2>
+
+                            <!-- class="tercerPaso" -->
+
+                            <div id="estiloMedidas" >
+                                <div class="col text-center my-4">
+                                    <h4>Ancho: <input type="number" name="ancho" id="ancho" min=".5" max="16" step=".01" required></h4>
+                                </div>
+
+
+                                <div class="col text-center my-4" >
+                                    <h4>Largo: <input type="number" name="largo" id="largo" min=".5" max="16" step=".01" required></h4>                        
+                                </div>
+                            </div>
+
+                            <div id="capturaFormaCirculo"></div>    
+                            <div id="capturaFormaCuadrada"></div> 
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="container-fluid">
+                <div class="row mt-5">
+
+
+
+                    <div class="col-6" id="seccionesFormulario">
+                        <div class="form-group blu-margin" >
+                            <h2 class="mt-3 text-center">Papel</h2>
+
+                            <select class="form-control" name="idPapel" required>
+                                <option></option>  <!-- onchange="this.form.submit()" -->
+                                <option
+                                    th:each="papel : ${papeles}"
+                                    th:value="${papel.id}"
+                                    th:text="${papel.descripcion} + '  Precio del papel por m2: ' + ${papel.precio_papel}">
+                                </option>                              
+                            </select>
+                            <!-- <input type="hidden">-->
+                        </div>
+                    </div>
+
+
+                    <div class="col-6" id="seccionesFormulario">
+
+                        <div class="form-group blu-margin">
+                            <h2 class="mt-3 text-center">Colores</h2>
+
+                            <select class="form-control" name="coloresEtiqueta" id="coloresEtiqueta" onchange="return seleccionDeSC()">
+                                <option></option>  <!-- onchange="this.form.submit()" -->
+                                <option value="sinColor">
+                                    Sin color
+                                </option>
+
+                                <option value="1">
+                                    1
+                                </option>
+
+                                <option value="2">
+                                    2
+                                </option>
+
+                                <option value="3">
+                                    3
+                                </option>
+                                <option value="4">
+                                    4 
+                                </option>
+                                <option value="5">
+                                    5
+                                </option>
+                                <option value="6">
+                                    6
+                                </option>
+                                <option value="7">
+                                    7
+                                </option>
+                                <option value="8">
+                                    8
+                                </option>
+                                <option value="seleccionSc">
+                                    Selección de colores CMYK
+                                </option>
+                                <option value="seleccionYUno">
+                                    Selección de colores CMYK + 1 Color
+                                </option>
+
+                                <option value="seleccionYDos">
+                                    Selección de colores CMYK + 2 Colores
+                                </option>
+
+                                <option value="seleccionYTres">
+                                    Selección de colores CMYK + 3 Colores
+                                </option>
+                                <option value="seleccionYCuatro">
+                                    Selección de colores CMYK + 4 Colores
+                                </option>
+
+
+
+                            </select>
+                        </div>
+                        <div class="row mt-3" >
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="seccionEspacio">
+                <div th:replace="cotizador/detallesComponentes :: tipoEtiqueta"></div>
+            </div>
+            <!--
+            <div class="row">
+                <div class="col">
+                    <div th:replace="cotizador/detallesComponentes :: corteEtiqueta"></div>
+                </div>
+                <div class="col">
+                    <div th:replace="cotizador/detallesComponentes :: detallesEsquinas"></div>
+                </div>
+                <div class="col">
+                    <div th:replace="cotizador/detallesComponentes :: tipoTinta"></div>
+                </div>
+            </div>
+            
+            -->
+            <div id="capturaPleca">
+                <div th:replace="cotizador/detallesComponentes :: corteEtiqueta"></div>
+            </div>
+
+
+
+
+            <div th:replace="cotizador/detallesComponentes :: detallesEsquinas"></div>
+
+
+            <div id="seccionTintas">
+                <div th:replace="cotizador/detallesComponentes :: tipoTinta"></div>
+            </div>
+
+            <!-- 
+            
+                  <div class="row">
+                <div class="col"></div>
+                <div class="col">
+                <div th:replace="cotizador/detallesComponentes :: detallesEsquinas"></div>
+                </div>
+                <div class="col"></div>
+            </div>
+            
+            -->
+
+
+
+
+
+
+
+            <div class="mt-3" id="seccionSalidaRollo">
+
+                <div th:replace="cotizador/detallesComponentes :: salidaRollo"></div>
+
+            </div>
+
+
+
+
+
+
+
+            <div class="container-fluid" id="destinoPaso7">
+                <div class="row mt-5">
+
+
+
+                    <div class="col-6" id="seccionesFormulario">
+                        <div class="form-group blu-margin">
+                            <h2 class="mt-3 text-center">Acabado (Laminado)</h2>
+
+                            <select class="form-control" name="tipoLaminado" id="tipoLaminado" required>
+                                <option></option>  <!-- onchange="this.form.submit()" -->
+                                <option value="laminadoStd">
+                                    Estandar
+                                </option>
+                                <option value="laminadoMate">
+                                    Mate
+                                </option>
+                                <option value="sinLaminado">
+                                    Sin laminado
+                                </option>
+                            </select>
+                            <!-- <input type="hidden">-->
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-6" id="seccionesFormulario">
+
+                        <div class="form-group blu-margin">
+                            <h2 class="mt-3 text-center">Recubrimiento (Barniz)</h2>
+
+                            <select class="form-control" name="acabado" id="acabado" required>
+                                <option></option>  <!-- onchange="this.form.submit()" -->
+                                <option value="barnizMate">
+                                    Mate
+                                </option>
+                                <option value="barnizBrillante">
+                                    Brillante
+                                </option>
+                                <option value="sinBarniz">
+                                    Sin barniz
+                                </option>
+                            </select>
+                            <!-- <input type="hidden">-->
+                        </div>
+                        <div class="row mt-3" >
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-3">
+                <div th:replace="cotizador/detallesComponentes :: tipoCentro"></div>
+
+            </div>
+
+
+
+
+
+
+
+            <div class="container-fluid" id="destinoCotizar">
+                <div class="row mt-5">
+                    <div class="col"></div>
+                    <div class="col text-center">
+                        <input  class="btn btn-lg mb-5" type="submit" value="Cotizar" style="background-color:#20B2E5; color: white">
+                    </div>
+                    <div class="col"></div>
+
+                </div>
+
+                <div class="row mt-1">
+                    <div class="col"></div>
+                    <div class="col text-center">
+                        <input  class="btn btn-secondary btn-lg active mb-5" type="reset" value="Limpiar datos">
+                    </div>
+                    <div class="col"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+
+
+
+
+
+
+    <footer>
+        <div th:replace="navigation :: footer_menu"></div>
+    </footer>
+
+    <script>
+
+
+
+        var btnprod1 = document.getElementsByClassName("primerPaso"); // <- this gives you  a HTMLCollection 
+
+        for (var i = 0; i < btnprod1.length; i++) {
+            btnprod1[i].onclick = function () {
+                $('html,body').animate({
+                    scrollTop: $("#destinoPaso1").offset().top},
+                        350);
+                document.getElementById("aplicacion").selectedIndex = 0;
+            };
+        }
+
+
+
+
+        var btnprodImpresion = document.getElementsByClassName("pasoImpresion"); // <- this gives you  a HTMLCollection 
+
+        for (var i = 0; i < btnprodImpresion.length; i++) {
+            btnprodImpresion[i].onclick = function () {
+                $('html,body').animate({
+                    scrollTop: $("#destinoPasoImpresion").offset().top},
+                        350);
+                document.getElementById("aplicacion").selectedIndex = 0;
+            };
+        }
+
+
+        var btnprod2 = document.getElementsByClassName("segundoPaso");
+
+
+
+        for (var i = 0; i < btnprod2.length; i++) {
+            btnprod2[i].onclick = function () {
+                $('html,body').animate({
+                    scrollTop: $("#destinoPaso2").offset().top},
+                        350);
+            };
+        }
+
+
+
+
+
+        var btnprod3 = document.getElementsByClassName("tercerPaso");
+
+
+        for (var i = 0; i < btnprod3.length; i++) {
+
+            btnprod3[i].onclick = function () {
+                $('html,body').animate({
+                    scrollTop: $("#destinoPaso3").offset().top},
+                        350);
+            };
+        }
+
+        var btnprod4 = document.getElementsByClassName("cuartoPaso");
+        for (var i = 0; i < btnprod4.length; i++) {
+
+            btnprod4[i].onclick = function () {
+                $('html,body').animate({
+                    scrollTop: $("#destinoPaso4").offset().top},
+                        350);
+            };
+        }
+
+        var btnprod5 = document.getElementsByClassName("quintoPaso");
+        for (var i = 0; i < btnprod5.length; i++) {
+
+            btnprod5[i].onclick = function () {
+                $('html,body').animate({
+                    scrollTop: $("#destinoPaso5").offset().top},
+                        350);
+            };
+        }
+
+        var btnprod6 = document.getElementsByClassName("sextoPaso");
+        for (var i = 0; i < btnprod6.length; i++) {
+
+            btnprod6[i].onclick = function () {
+                $('html,body').animate({
+                    scrollTop: $("#destinoPaso6").offset().top},
+                        350);
+            };
+        }
+
+        var btnprod7 = document.getElementsByClassName("septimoPaso");
+        for (var i = 0; i < btnprod7.length; i++) {
+
+            btnprod7[i].onclick = function () {
+                $('html,body').animate({
+                    scrollTop: $("#destinoPaso7").offset().top},
+                        350);
+            };
+        }
+
+        var btnprod8 = document.getElementsByClassName("ultimoPaso");
+        for (var i = 0; i < btnprod7.length; i++) {
+
+            btnprod8[i].onclick = function () {
+                $('html,body').animate({
+                    scrollTop: $("#destinoCotizar").offset().top},
+                        350);
+            };
+        }
+
+
+
+
+        function otraOpcionAplicacion() {
+
+            $('input[name="tipoAplicacion"]').prop('checked', false);
+
+        }
+
+
+        var conDiseño = "<div class='my-4'> <div class='row' id=''>  \n\
+                                   <div class='text-center my-4'>\n\
+                     <h4 for='tieneDiseño'>Tengo un diseño <input type='radio' name='clienteDiseño' id='tieneDiseño' value='tieneDiseño' required> </h4> </br>\n\
+                    <h4 for='quiereDiseño'>Quiero añadir servicio de diseño  <input type='radio' name='clienteDiseño' id='quiereDiseño' value='quiereDiseño' required></h4> </br>\n\
+                            \n\
+                        </div></div></div>";
+
+        var capturaDiseñoCliente = document.getElementById("capturaDiseñoCliente");
+
+
+
+        function checkDiseñoCliente() {
+
+            for (radio of radios) {
+
+                if (radio.checked) {
+                    if (radio.value === "conDiseño") {
+
+
+                        $("#capturaDiseñoCliente").show();
+                        capturaDiseñoCliente.innerHTML = conDiseño;
+
+
+
+                    } else if (radio.value === "sinDiseño") {
+
+                        $("#capturaDiseñoCliente").hide();
+                        //$("#seccionSalidaRollo").hide();
+
+
+
+                    }
+                }
+            }
+
+
+        }
+
+        function seleccionDeSC() {
+            var validColores = document.getElementById("coloresEtiqueta");
+            var value = validColores.options[validColores.selectedIndex].value;
+
+            if (value === "sinColor") {
+
+                $("#seccionTintas").hide();
+            } else {
+                $("#seccionTintas").show();
+            }
+
+
+        }
+
+
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>
