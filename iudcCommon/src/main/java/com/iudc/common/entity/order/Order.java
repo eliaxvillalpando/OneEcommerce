@@ -61,7 +61,7 @@ public class Order extends AbstractAddress {
 	private List<OrderTrack> orderTracks = new ArrayList<>();
 	
 	public Order() {
-	}
+	} 
 	
 	public Order(Integer id, Date orderTime, float productCost, float subtotal, float total) {
 		this.id = id;

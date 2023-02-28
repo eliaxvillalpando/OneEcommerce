@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head th:replace="cotizador/detallesComponentes :: page_cotizador('Cotizador', 'none')"/>
-    
+
     <style>
 
         header{ min-height:50px; }
@@ -68,7 +68,7 @@
 
 
 
-        <form action="datosCapturados" onsubmit="return validateForm()" name="formCotizador" method="GET">
+        <form th:action="@{/datosCapturados}" onsubmit="return validateForm()" name="formCotizador" method="POST" autocomplete="off">
 
 
             <div th:replace="cotizador/detallesComponentes :: aplicacionEtiqueta"></div>
@@ -91,17 +91,19 @@
 
                             <div id="estiloMedidas" >
                                 <div class="col text-center my-4">
-                                    <h4>Ancho: <input type="number" name="ancho" id="ancho" min=".5" max="16" step=".01" required></h4>
+                                    <h4>Ancho: <input type="number" name="ancho" id="ancho" min=".5" max="16" step=".01"> cm</h4>
                                 </div>
 
 
                                 <div class="col text-center my-4" >
-                                    <h4>Largo: <input type="number" name="largo" id="largo" min=".5" max="16" step=".01" required></h4>                        
+                                    <h4>Largo: <input type="number" name="largo" id="largo" min=".5" max="16" step=".01"> cm</h4>                        
                                 </div>
                             </div>
 
                             <div id="capturaFormaCirculo"></div>    
                             <div id="capturaFormaCuadrada"></div> 
+                            <div id="capturaRadios"></div> 
+                            <div id="capturaContinua"></div> 
 
                         </div>
 
@@ -112,43 +114,57 @@
             </div>
 
 
-
-
-
-
-
-
-
             <div class="container-fluid">
                 <div class="row mt-5">
 
-
-
-                    <div class="col-6" id="seccionesFormulario">
+                    <div class="col" id="seccionesFormulario">
                         <div class="form-group blu-margin" >
-                            <h2 class="mt-3 text-center">Papel</h2>
+                            
+                            <h2 class="mt-3 text-center">Papel</h2><h3> <i class="fas fa-info-circle" 
+                        title="Dependiendo de la superficie de aplicación filtramos las opciones de papel que se recomiendan. Si no se muestra ningun papel, selecciona una superficie de aplicación"></i>
+                            </h3>
+                            
+                            <select class="form-control" name="idPapel" id="papelPorAplicacion" required>
 
-                            <select class="form-control" name="idPapel" required>
-                                <option></option>  <!-- onchange="this.form.submit()" -->
-                                <option
-                                    th:each="papel : ${papeles}"
-                                    th:value="${papel.id}"
-                                    th:text="${papel.descripcion} + '  Precio del papel por m2: ' + ${papel.precio_papel}">
-                                </option>                              
                             </select>
+                            <details>
+                                <summary>Info papeles</summary>
+                                <ul><b>BOPP:</b> película de polipropileno con un revestimiento 
+                                    que permite que sea termosellado. Su característica 
+                                    principal es la barrera de protección que ofrece 
+                                    para evitar la entrada o salida de humedad.
+                                </ul>
+                                <ul><b>PCB-PERM:</b> es un tipo de papel autoadhesivo 
+                                    diseñado para su uso en superficies difíciles y texturizadas
+                                    Plásticos: El papel PCB-Perm es una opción popular para etiquetar productos de plástico y para aplicaciones de identificación en el sector de electrónica.
+
+                                    Metales: Este tipo de papel es resistente a la corrosión y a las rayaduras, lo que lo hace adecuado para aplicaciones en superficies metálicas, como cajas de control, equipos de audio y otros componentes electrónicos.
+
+                                    Vidrio: El papel PCB-Perm es resistente a la humedad y a la intemperie, lo que lo hace adecuado para aplicaciones en superficies de vidrio, como paneles de control y pantallas táctiles.
+
+                                    Superficies rugosas y texturizadas: Este tipo de papel tiene una alta adherencia y es capaz de aferrarse a superficies rugosas y texturizadas, lo que lo hace adecuado para aplicaciones en superficies como muebles de oficina y equipos de gimnasia.
+                                </ul>
+                                
+                            </details>
                             <!-- <input type="hidden">-->
                         </div>
                     </div>
 
 
-                    <div class="col-6" id="seccionesFormulario">
+                </div>
+            </div>
+
+
+            <div class="container-fluid">
+
+                <div id="seccionElegirColores">
+                    <div class="col" id="seccionesFormulario">
 
                         <div class="form-group blu-margin">
                             <h2 class="mt-3 text-center">Colores</h2>
 
-                            <select class="form-control" name="coloresEtiqueta" id="coloresEtiqueta" onchange="return seleccionDeSC()">
-                                <option></option>  <!-- onchange="this.form.submit()" -->
-                                <option value="sinColor">
+                            <select class="form-control" name="coloresEtiqueta" id="coloresEtiqueta"  onchange="return seleccionY4Directos()" onsubmit="return checkColor()">
+                                <option value="sinColor" selected="">
                                     Sin color
                                 </option>
 
@@ -156,171 +172,122 @@
                                     1
                                 </option>
 
-                                <option value="2">
-                                    2
-                                </option>
-
-                                <option value="3">
-                                    3
-                                </option>
-                                <option value="4">
-                                    4 
-                                </option>
-                                <option value="5">
-                                    5
-                                </option>
-                                <option value="6">
-                                    6
-                                </option>
-                                <option value="7">
-                                    7
-                                </option>
-                                <option value="8">
-                                    8
-                                </option>
-                                <option value="seleccionSc">
-                                    Selección de colores CMYK
-                                </option>
-                                <option value="seleccionYUno">
-                                    Selección de colores CMYK + 1 Color
-                                </option>
-
-                                <option value="seleccionYDos">
-                                    Selección de colores CMYK + 2 Colores
-                                </option>
-
-                                <option value="seleccionYTres">
-                                    Selección de colores CMYK + 3 Colores
-                                </option>
-                                <option value="seleccionYCuatro">
-                                    Selección de colores CMYK + 4 Colores
-                                </option>
-
-
-
                             </select>
+
                         </div>
                         <div class="row mt-3" >
                             <p></p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="seccionesFormulario">
+                <div id="seleccionarColores">
+                </div>
+            </div>
+
+            <div id="laminadoYbarniz">
+                <div class="container-fluid" id="destinoPaso7">
+                    <div class="row mt-5">
+
+
+
+                        <div class="col" id="seccionesFormulario">
+                            <div class="form-group blu-margin">
+                                <h2 class="mt-3 text-center">Acabado (Laminado y/o Barniz)</h2>
+                                <select class="form-control" name="tipoLaminado" id="tipoLaminado" required > <!--onchange="return tercerPaso();"-->
+                                    <option></option>  <!-- onchange="this.form.submit()" -->
+                                    <option value="laminadoStd" >
+                                        Laminado estándar
+                                    </option>
+                                    <option value="laminadoMate">
+                                        Laminado Mate
+                                    </option>
+                                    <option value="barnizMate">
+                                        Barniz Mate
+                                    </option>
+                                    <option value="barnizBrillante">
+                                        Barniz Brillante
+                                    </option>
+                                    <option value="barnizRegistro">
+                                        Barniz a registro
+                                    </option>
+                                    <option value="sinRecubrimiento" selected>
+                                        Sin barniz o laminado
+                                    </option>
+
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="seccionEspacio">
-                <div th:replace="cotizador/detallesComponentes :: tipoEtiqueta"></div>
-            </div>
-            <!--
-            <div class="row">
-                <div class="col">
-                    <div th:replace="cotizador/detallesComponentes :: corteEtiqueta"></div>
-                </div>
-                <div class="col">
-                    <div th:replace="cotizador/detallesComponentes :: detallesEsquinas"></div>
-                </div>
-                <div class="col">
-                    <div th:replace="cotizador/detallesComponentes :: tipoTinta"></div>
-                </div>
-            </div>
-            
-            -->
-            <div id="capturaPleca">
-                <div th:replace="cotizador/detallesComponentes :: corteEtiqueta"></div>
-            </div>
+
+            <!--<div th:replace="cotizador/detallesComponentes :: detallesEsquinas"></div>-->
 
 
+            <div id="seccionSalida">
+                <div  id="seccionesFormulario">
+                    <div class="container-fluid mt-3 mb-3">
+
+                        <h2 id="tituloSeccionFormulario" class="text-center py-3">Salida etiqueta</h2>
 
 
-            <div th:replace="cotizador/detallesComponentes :: detallesEsquinas"></div>
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col-xs-4 col-md-4 text-center my-3">
+                                <label>Seleccionar</label>
+                                <select class="form-control" id="selectTipoSalida" name="tipoSalidaEtiqueta" onchange="return tipoDeSalidaImagen()">
 
+                                    <option value="SalidaCabezaPorFuera">
+                                        Cabeza por fuera
+                                    </option>
+                                    <option value="derechaPorFuera">
+                                        Derecha por fuera
+                                    </option>
+                                    <option value="SalidaVistaDerechaPorFuera">
+                                        Vista derecha por fuera
+                                    </option>
+                                    <option value="SalidaVistaIzquierdaPorFuera">
+                                        Vista izquierda por fuera
+                                    </option>
+                                    <option value="derechaPorDentro">
+                                        Derecha por dentro
+                                    </option>
+                                    <option value="SalidaCabezaPorDentro">
+                                        Cabeza por dentro
+                                    </option>
+                                    <option value="SalidaVistaDerechaPorDentro">
+                                        Vista derecha por dentro
+                                    </option>
+                                    <option value="SalidaVistaIzquierdaPorDentro">
+                                        Vista izquierda por dentro
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col"></div>
+                            <div class="col-xs-4 col-md-4 text-center">
+                                <div id="DivSalidaEtiqueta"></div> 
+                                <div id="salidaDefault">
+                                    <label>
+                                        <img id="imagenFormaEtiqueta" th:src="@{images/cotizador/salidaCabeza.png}" alt="Salida de cabeza por fuera">
+                                    </label>
+                                    <details>
+                                        <summary>Info</summary>
+                                        Donec et turpis et ligula suscipit tincidunt vel et lacus. Duis sed elit et risus eleifend maximus. Maecenas vehicula a leo nec tincidunt
+                                    </details>  
+                                </div> 
+                            </div>
 
-            <div id="seccionTintas">
-                <div th:replace="cotizador/detallesComponentes :: tipoTinta"></div>
-            </div>
-
-            <!-- 
-            
-                  <div class="row">
-                <div class="col"></div>
-                <div class="col">
-                <div th:replace="cotizador/detallesComponentes :: detallesEsquinas"></div>
-                </div>
-                <div class="col"></div>
-            </div>
-            
-            -->
-
-
-
-
-
-
-
-            <div class="mt-3" id="seccionSalidaRollo">
-
-                <div th:replace="cotizador/detallesComponentes :: salidaRollo"></div>
-
-            </div>
-
-
-
-
-
-
-
-            <div class="container-fluid" id="destinoPaso7">
-                <div class="row mt-5">
-
-
-
-                    <div class="col-6" id="seccionesFormulario">
-                        <div class="form-group blu-margin">
-                            <h2 class="mt-3 text-center">Acabado (Laminado)</h2>
-
-                            <select class="form-control" name="tipoLaminado" id="tipoLaminado" required>
-                                <option></option>  <!-- onchange="this.form.submit()" -->
-                                <option value="laminadoStd">
-                                    Estandar
-                                </option>
-                                <option value="laminadoMate">
-                                    Mate
-                                </option>
-                                <option value="sinLaminado">
-                                    Sin laminado
-                                </option>
-                            </select>
-                            <!-- <input type="hidden">-->
-
-                        </div>
-                    </div>
-
-
-                    <div class="col-6" id="seccionesFormulario">
-
-                        <div class="form-group blu-margin">
-                            <h2 class="mt-3 text-center">Recubrimiento (Barniz)</h2>
-
-                            <select class="form-control" name="acabado" id="acabado" required>
-                                <option></option>  <!-- onchange="this.form.submit()" -->
-                                <option value="barnizMate">
-                                    Mate
-                                </option>
-                                <option value="barnizBrillante">
-                                    Brillante
-                                </option>
-                                <option value="sinBarniz">
-                                    Sin barniz
-                                </option>
-                            </select>
-                            <!-- <input type="hidden">-->
-                        </div>
-                        <div class="row mt-3" >
-                            <p></p>
+                            <div class="col"></div>
                         </div>
                     </div>
                 </div>
-
             </div>
+
 
             <div class="mt-3">
                 <div th:replace="cotizador/detallesComponentes :: tipoCentro"></div>
@@ -328,16 +295,11 @@
             </div>
 
 
-
-
-
-
-
             <div class="container-fluid" id="destinoCotizar">
                 <div class="row mt-5">
                     <div class="col"></div>
                     <div class="col text-center">
-                        <input  class="btn btn-lg mb-5" type="submit" value="Cotizar" style="background-color:#20B2E5; color: white">
+                        <input  class="btn btn-lg mb-5" type="submit" value="Cotizar" style="background-color:#20B2E5; color: white" >
                     </div>
                     <div class="col"></div>
 
@@ -346,21 +308,13 @@
                 <div class="row mt-1">
                     <div class="col"></div>
                     <div class="col text-center">
-                        <input  class="btn btn-secondary btn-lg active mb-5" type="reset" value="Limpiar datos">
+                        <input  class="btn btn-secondary btn-lg active mb-5" type="reset" value="Limpiar datos" onclick="return irArriba()" style="background-color: #CF3650">
                     </div>
                     <div class="col"></div>
                 </div>
-
             </div>
-
         </div>
-
     </form>
-
-
-
-
-
 
 
 
@@ -368,8 +322,47 @@
         <div th:replace="navigation :: footer_menu"></div>
     </footer>
 
-    <script>
+        <script>
+            
+            
+            
+        
+        
+   
 
+        function irArriba() {
+
+            window.scrollTo(0, 0);
+
+        }
+
+
+
+        function checkColor() {
+
+
+            var x = document.getElementById("seleccionClienteUnColor").value;
+            var y = document.getElementById("seleccionClienteColor1").value;
+            var z = document.getElementById("seleccionClienteColor2").value;
+
+            if (selectedColor === "1") {
+
+                document.getElementById("GFG").innerHTML = x;
+
+            } else if (selectedColor === "2") {
+
+                document.getElementById("GFG").innerHTML = y + z;
+                //(document.getElementById("GFG").innerHTML = z;
+
+
+            } else if (selectedColor === "sinColor") {
+
+                $("#GFG").hide();
+
+
+            }
+
+        }
 
 
         var btnprod1 = document.getElementsByClassName("primerPaso"); // <- this gives you  a HTMLCollection 
@@ -413,83 +406,305 @@
 
 
 
+        function tercerPaso() {
 
-        var btnprod3 = document.getElementsByClassName("tercerPaso");
+            $('html,body').animate({
+                scrollTop: $("#destinoPaso3").offset().top},
+                    350);
 
-
-        for (var i = 0; i < btnprod3.length; i++) {
-
-            btnprod3[i].onclick = function () {
-                $('html,body').animate({
-                    scrollTop: $("#destinoPaso3").offset().top},
-                        350);
-            };
-        }
-
-        var btnprod4 = document.getElementsByClassName("cuartoPaso");
-        for (var i = 0; i < btnprod4.length; i++) {
-
-            btnprod4[i].onclick = function () {
-                $('html,body').animate({
-                    scrollTop: $("#destinoPaso4").offset().top},
-                        350);
-            };
-        }
-
-        var btnprod5 = document.getElementsByClassName("quintoPaso");
-        for (var i = 0; i < btnprod5.length; i++) {
-
-            btnprod5[i].onclick = function () {
-                $('html,body').animate({
-                    scrollTop: $("#destinoPaso5").offset().top},
-                        350);
-            };
-        }
-
-        var btnprod6 = document.getElementsByClassName("sextoPaso");
-        for (var i = 0; i < btnprod6.length; i++) {
-
-            btnprod6[i].onclick = function () {
-                $('html,body').animate({
-                    scrollTop: $("#destinoPaso6").offset().top},
-                        350);
-            };
-        }
-
-        var btnprod7 = document.getElementsByClassName("septimoPaso");
-        for (var i = 0; i < btnprod7.length; i++) {
-
-            btnprod7[i].onclick = function () {
-                $('html,body').animate({
-                    scrollTop: $("#destinoPaso7").offset().top},
-                        350);
-            };
-        }
-
-        var btnprod8 = document.getElementsByClassName("ultimoPaso");
-        for (var i = 0; i < btnprod7.length; i++) {
-
-            btnprod8[i].onclick = function () {
-                $('html,body').animate({
-                    scrollTop: $("#destinoCotizar").offset().top},
-                        350);
-            };
         }
 
 
 
+
+
+        function papelPorTipoAplicacion() {
+
+            var papelAplicacion = document.getElementById("papelPorAplicacion");
+            var aplicacion = document.querySelector('input[name="tipoAplicacion"]:checked').value;
+
+
+
+            var aplicacionEnPlastico = '<option value="boppPermAdhPerm" selected>BOPP blanco - Adhesivo permanente</option>\n\
+                                        <option value="boppAdhAgresivo" >BOPP blanco- Adhesivo agresivo</option>\n\
+                                        <option value="boppTransparente" >BOPP transparente</option>\n\
+                                        <option value="pcbPerm" >PCB couche blanco - Adhesivo permanente</option>\n\
+                                        <option value="pcbPermSinAdh" >PCB couche blanco - Sin Adhesivo</option>\n\
+                                        <option value="ttAdhAgreviso" >Transferencia termica blanco - Adhesivo agresivo</option>\n\
+                                        <option value="ttAdhPermanente" >Transferencia termica blanco - Adhesivo permanente</option>\n\
+                                        <option value="pcbHotMelt">PCB Hot Melt</option>\n\
+                                        <option value="silverAnchor">Silver anchor</option>';
+
+            var aplicacionEnCarton = '<option value="ttAdhAgreviso" selected>Transferencia termica blanco - Adhesivo agresivo</option>\n\
+                                        <option value="ttAdhPermanente" >Transferencia termica blanco - Adhesivo permanente</option>\n\
+                                        <option value="pcbPerm" >PCB couche blanco - Adhesivo permanente</option>\n\
+                                        <option value="pcbPermSinAdh" >PCB couche blanco - Sin Adhesivo</option>\n\
+                                         <option value="tdPerm"> TD - Adhesivo permanente </option>';
+
+            var aplicacionEnVidrio = '<option value="boppPermAdhPerm" selected>BOPP blanco - Adhesivo permanente</option>\n\
+                                        <option value="boppAdhAgresivo" >BOPP blanco- Adhesivo agresivo</option>\n\
+                                        <option value="boppTransparente" >BOPP transparente</option>\n\
+                                        <option value="pcbPerm" >PCB couche blanco - Adhesivo permanente</option>\n\
+                                        <option value="pcbPermSinAdh" >PCB couche blanco - Sin Adhesivo</option>\n\
+                                        <option value="pcbHotMelt">PCB Hot Melt</option>\n\
+                                        <option value="silverAnchor">Silver anchor</option>';
+
+            var aplicacionEnPapel = '<option value="pcbPerm" >PCB couche blanco - Adhesivo permanente</option>\n\
+                                        <option value="pcbPermSinAdh" >PCB couche blanco - Sin Adhesivo</option>\n\
+                                        <option value="ttAdhAgreviso" >Transferencia termica blanco - Adhesivo agresivo</option>\n\
+                                        <option value="ttAdhPermanente" >Transferencia termica blanco - Adhesivo permanente</option>\n\
+                                       <option value="tdPerm"> TD - Adhesivo permanente </option>';
+
+            var aplicacionEnElectronicos = '<option value="boppAdhAgresivo" >BOPP blanco- Adhesivo agresivo</option>\n\
+                                        <option value="boppTransparente" >BOPP transparente</option>\n\
+                                        <option value="pcbHotMelt">PCB Hot Melt</option>\n\
+                                        <option value="silverAnchor">Silver anchor</option>';
+
+
+            //Esto quita si hay selección en el select de otras aplicaciones
+            const select = document.getElementById("otrasAplicaciones");
+            select.selectedIndex = 0;
+
+
+
+
+            if (aplicacion === "Plástico") {
+
+                papelAplicacion.innerHTML = aplicacionEnPlastico;
+
+            } else if (aplicacion === "Cartón") {
+
+                papelAplicacion.innerHTML = aplicacionEnCarton;
+
+            } else if (aplicacion === "Cerveza" || aplicacion === "Vino" || aplicacion === "Vidrio") {
+
+                papelAplicacion.innerHTML = aplicacionEnVidrio;
+
+            } else if (aplicacion === "Papel") {
+
+                papelAplicacion.innerHTML = aplicacionEnPapel;
+
+            } else if (aplicacion === "Electronicos") {
+
+                papelAplicacion.innerHTML = aplicacionEnElectronicos;
+
+            }
+
+        }
 
         function otraOpcionAplicacion() {
 
             $('input[name="tipoAplicacion"]').prop('checked', false);
 
+
+            var papelAplicacion = document.getElementById("papelPorAplicacion");
+            var valorAplicacionOtras = document.getElementById("otrasAplicaciones");
+            var selectedOtraAplicacion = valorAplicacionOtras.options[valorAplicacionOtras.selectedIndex].value;
+
+            var aplicacionEnTextil = '<option value="boppPermAdhPerm" selected>BOPP blanco - Adhesivo permanente</option>\n\
+                                        <option value="boppAdhAgresivo" >BOPP blanco- Adhesivo agresivo</option>\n\
+                                        <option value="boppTransparente" >BOPP transparente</option>\n\
+                                        <option value="cartoncillo8" >Cartoncillo 8 puntos</option>\n\
+                                        <option value="cartoncillo10" >Cartoncillo 10 puntos</option>\n\
+                                        <option value="tykevAdh" >Tyvek con adhesivo</option>\n\
+                                        <option value="tykevSinAdh" >Tyvek sin adhesivo</option>\n\
+                                        <option value="nylonAdh" >Nylon con adhesivo</option>\n\
+                                        <option value="nylonSinAdh" >Nylon sin adhesivo</option>\n\
+                                        <option value="pcbHotMelt" selected>PCB Hot Melt</option>\n\
+                                        <option value="silverAnchor" selected>Silver anchor</option>';
+
+
+            var aplicacionEnAlimentosRefrigerados = '<option value="pcbHotMelt" selected>PCB Hot Melt - (Maximo -4° C) </option>\n\
+                                                     <option value="fassonCoEx">Fasson Global Co-ex Clear</option>\n\
+                                                    <option value="pcbHotMelt" selected>PCB Hot Melt</option>\n\
+                                                    <option value="silverAnchor" selected>Silver anchor</option>';
+
+
+            var aplicacionEnMetal = '<option value="pcbCouche" selected>PCB couche</option>\n\
+                                    <option value="silverAnchor" selected>Silver anchor</option>\n\
+                                    <option value="pcbHotMelt" selected>PCB Hot Melt</option>';
+
+            var aplicacionNeumaticos = '<option value="pcbHotMelt" selected>PCB Hot Melt</option>\n\
+                                        <option value="silverAnchor" selected>Silver anchor</option>';
+
+
+            if (selectedOtraAplicacion === "Textil") {
+
+                papelAplicacion.innerHTML = aplicacionEnTextil;
+
+            } else if (selectedOtraAplicacion === "alimentosRefrigerados") {
+
+                papelAplicacion.innerHTML = aplicacionEnAlimentosRefrigerados;
+
+            } else if (selectedOtraAplicacion === "neumaticos") {
+
+                papelAplicacion.innerHTML = aplicacionNeumaticos;
+
+            } else if (selectedOtraAplicacion === "Acero") {
+
+                papelAplicacion.innerHTML = aplicacionEnMetal;
+
+            }
+            $('html,body').animate({
+                scrollTop: $("#destinoPaso1").offset().top},
+                    350);
+            document.getElementById("aplicacion").selectedIndex = 0;
         }
 
 
-        var conDiseño = "<div class='my-4'> <div class='row' id=''>  \n\
+
+
+        function seleccionY4Directos() {
+
+
+
+            var valorColores = document.getElementById("coloresEtiqueta");
+            var selectedColor = valorColores.options[valorColores.selectedIndex].value;
+            var seleccionarColores = document.getElementById("seleccionarColores");
+
+            var unColor = "<div class='my-4' id='divInputColor'> <div class='row'>  \n\
                                    <div class='text-center my-4'>\n\
-                     <h4 for='tieneDiseño'>Tengo un diseño <input type='radio' name='clienteDiseño' id='tieneDiseño' value='tieneDiseño' required> </h4> </br>\n\
-                    <h4 for='quiereDiseño'>Quiero añadir servicio de diseño  <input type='radio' name='clienteDiseño' id='quiereDiseño' value='quiereDiseño' required></h4> </br>\n\
+                     <h4>Color: <input type='color' name='seleccionClienteUnColor' id='seleccionClienteUnColor' value='seleccionClienteUnColor' > </h4> </br>\n\
+                        </div></div></div>";
+
+
+            /*
+             var dosColores = "<div class='my-4'> <div class='row' id=''>  \n\
+             <div class='text-center my-4'>\n\
+             <h4>Color 1: <input type='color' name='seleccionClienteColor1' id='seleccionClienteColor1' value='seleccionClienteColor1' > </h4> </br>\n\
+             <h4>Color 2: <input type='color' name='seleccionClienteColor2' id='seleccionClienteColor2' value='seleccionClienteColor2' > </h4> </br>\n\ </br>\n\
+             \n\
+             </div></div></div>";
+             */
+
+
+
+
+
+            if (selectedColor === "1") {
+                $("#seleccionarColores").show();
+                seleccionarColores.innerHTML = unColor;
+
+
+            } else if (selectedColor === "2") {
+                $("#seleccionarColores").show();
+                seleccionarColores.innerHTML = dosColores;
+
+            } else if (selectedColor === "sinColor") {
+
+                $("#seleccionarColores").hide();
+
+
+
+            }
+
+
+        }
+
+
+
+
+
+        function tipoDeSalidaImagen() {
+
+            var capturaTipoSalida = document.getElementById("DivSalidaEtiqueta");
+            var valorTipoSalida = document.getElementById("selectTipoSalida");
+            var selectedValue = valorTipoSalida.options[valorTipoSalida.selectedIndex].value;
+
+            var derechaPorFuera = '<label>\n\
+                                <img id="imagenFormaEtiqueta" src="images/cotizador/salidaDerecha.png" alt="Salida derecha">\n\
+                                </label><details>\n\
+                                <summary>Info</summary>\n\
+                                    Proin dignissim consequat elit. Vestibulum ac pretium leo. Cras tincidunt augue mollis velit rutrum hendrerit. Integer tempus, turpis in dignissim interdum\n\
+                                    </details>';
+
+            var vistaDerechaPorFuera = '<label>\n\
+                                <img id="imagenFormaEtiqueta" src="images/cotizador/salidaVDerecha.png" alt="Salida vista derecha por fuera">\n\
+                                </label><details>\n\
+                                <summary>Info</summary>\n\
+                                    Proin dignissim consequat elit. Vestibulum ac pretium leo. Cras tincidunt augue mollis velit rutrum hendrerit. Integer tempus, turpis in dignissim interdum\n\
+                                    </details>';
+            var vistaIzquierdaPorFuera = '<label>\n\
+                                <img id="imagenFormaEtiqueta" src="images/cotizador/salidaVIzquierda.png" alt="Salida vista izquierda por fuera">\n\
+                                </label><details>\n\
+                                <summary>Info</summary>\n\
+                                    Proin dignissim consequat elit. Vestibulum ac pretium leo. Cras tincidunt augue mollis velit rutrum hendrerit. Integer tempus, turpis in dignissim interdum\n\
+                                    </details>';
+
+            var derechaPorDentro = '<label>\n\
+                                <img id="imagenFormaEtiqueta" src="images/cotizador/derechaPorDentro.png" alt="Salida derecha por dentro">\n\
+                                </label><details>\n\
+                                <summary>Info</summary>\n\
+                                    Proin dignissim consequat elit. Vestibulum ac pretium leo. Cras tincidunt augue mollis velit rutrum hendrerit. Integer tempus, turpis in dignissim interdum\n\
+                                    </details>';
+            var cabezaPorDentro = '<label>\n\
+                                <img id="imagenFormaEtiqueta" src="images/cotizador/salidaCabezaPorDentro.png" alt="Salida de cabeza por dentro">\n\
+                                </label><details>\n\
+                                <summary>Info</summary>\n\
+                                    Proin dignissim consequat elit. Vestibulum ac pretium leo. Cras tincidunt augue mollis velit rutrum hendrerit. Integer tempus, turpis in dignissim interdum\n\
+                                    </details>';
+            var vistaDerechaPorDentro = '<label>\n\
+                                <img id="imagenFormaEtiqueta" src="images/cotizador/salidaVDPorDentro.png" alt="Salida vista derecha por dentro">\n\
+                                </label><details>\n\
+                                <summary>Info</summary>\n\
+                                    Proin dignissim consequat elit. Vestibulum ac pretium leo. Cras tincidunt augue mollis velit rutrum hendrerit. Integer tempus, turpis in dignissim interdum\n\
+                                    </details>';
+            var vistaIzquierdaPorDentro = '<label>\n\
+                                <img id="imagenFormaEtiqueta" src="images/cotizador/salidaVistaIzquiPorDentro.png" alt="Salida vista derecha por dentro">\n\
+                                </label><details>\n\
+                                <summary>Info</summary>\n\
+                                    Proin dignissim consequat elit. Vestibulum ac pretium leo. Cras tincidunt augue mollis velit rutrum hendrerit. Integer tempus, turpis in dignissim interdum\n\
+                                    </details>';
+
+
+            if (selectedValue === "derechaPorFuera") {
+                $("#salidaDefault").hide();
+                $("#DivSalidaEtiqueta").show();
+                capturaTipoSalida.innerHTML = derechaPorFuera;
+
+            } else if (selectedValue === "SalidaCabezaPorFuera") {
+                $("#salidaDefault").show();
+                $("#DivSalidaEtiqueta").hide();
+            } else if (selectedValue === "SalidaVistaDerechaPorFuera") {
+                $("#salidaDefault").hide();
+                $("#DivSalidaEtiqueta").show();
+                capturaTipoSalida.innerHTML = vistaDerechaPorFuera;
+
+            } else if (selectedValue === "SalidaVistaIzquierdaPorFuera") {
+                $("#salidaDefault").hide();
+                $("#DivSalidaEtiqueta").show();
+                capturaTipoSalida.innerHTML = vistaIzquierdaPorFuera;
+
+            } else if (selectedValue === "derechaPorDentro") {
+                $("#salidaDefault").hide();
+                $("#DivSalidaEtiqueta").show();
+                capturaTipoSalida.innerHTML = derechaPorDentro
+
+            } else if (selectedValue === "SalidaCabezaPorDentro") {
+                $("#salidaDefault").hide();
+                $("#DivSalidaEtiqueta").show();
+                capturaTipoSalida.innerHTML = cabezaPorDentro;
+
+            } else if (selectedValue === "SalidaVistaDerechaPorDentro") {
+                $("#salidaDefault").hide();
+                $("#DivSalidaEtiqueta").show();
+                capturaTipoSalida.innerHTML = vistaDerechaPorDentro;
+
+            } else if (selectedValue === "SalidaVistaIzquierdaPorDentro") {
+                $("#salidaDefault").hide();
+                $("#DivSalidaEtiqueta").show();
+                capturaTipoSalida.innerHTML = vistaIzquierdaPorDentro;
+
+            }
+
+
+        }
+
+
+        var conDiseño = "<div class='my-4'> <div class='row' id='radio-tipo-diseno'>  \n\
+                                   <div class='text-center my-4'>\n\
+                     <h4 for='tieneDiseño'>Tengo un diseño <input type='radio' name='clienteDiseno' id='tieneDiseño' value='tieneDiseno'> </h4> </br>\n\
+                    <h4 for='quiereDiseño'>Necesito servicio de diseño <input type='radio' name='clienteDiseno' id='quiereDiseño' value='quiereDiseno'></h4> </br>\n\
                             \n\
                         </div></div></div>";
 
@@ -502,47 +717,68 @@
             for (radio of radios) {
 
                 if (radio.checked) {
-                    if (radio.value === "conDiseño") {
-
+                    if (radio.value === "conDiseno") {
 
                         $("#capturaDiseñoCliente").show();
                         capturaDiseñoCliente.innerHTML = conDiseño;
+                        $("#seccionSalida").show();
+                        //se agrega ahorita
+                         document.getElementById("coloresEtiqueta").value = null;    
+                        $("#seccionElegirColores").hide();
+                        $("#divInputColor").hide();
 
-
-
-                    } else if (radio.value === "sinDiseño") {
-
+                    } else if (radio.value === "sinDiseno") {
                         $("#capturaDiseñoCliente").hide();
-                        //$("#seccionSalidaRollo").hide();
-
-
-
+                        $("#seccionSalida").hide();       
+                        document.getElementById("tieneDiseño").value = null;
+                document.getElementById("quiereDiseño").value = null;
+                document.getElementById("selectTipoSalida").value = null;
+                $("#seccionElegirColores").show();
                     }
                 }
             }
 
+            var seccionColoresOcultarMostrar = document.getElementById("seccionElegirColores");
+            var tipoDiseñoImpreso = document.querySelector('input[name="tipoDiseno"]:checked').value;
+
+            /*
+            if (tipoDiseñoImpreso === "conDiseno") {
+            document.getElementById("coloresEtiqueta").value = null;    
+            $("#seccionElegirColores").hide();
+            $("#divInputColor").hide();
+                
+
+            } else if (tipoDiseñoImpreso === "sinDiseno") {
+                $("#divInputColor").show();
+                
+                //asignar valor "" a salida etiqueta
+                document.getElementById("tieneDiseño").value = null;
+                document.getElementById("quiereDiseño").value = null;
+                document.getElementById("selectTipoSalida").value = null;
+                $("#seccionElegirColores").show();
+
+            }*/
 
         }
 
-        function seleccionDeSC() {
-            var validColores = document.getElementById("coloresEtiqueta");
-            var value = validColores.options[validColores.selectedIndex].value;
-
-            if (value === "sinColor") {
-
-                $("#seccionTintas").hide();
-            } else {
-                $("#seccionTintas").show();
-            }
-
-
-        }
-
-
-
-
-
-
+        /*
+         function seleccionDeSC() {
+         var validColores = document.getElementById("coloresEtiqueta");
+         var value = validColores.options[validColores.selectedIndex].value;
+         
+         if (value === "sinColor") {
+         
+         $("#seccionTintas").hide();
+         $("#divInputColor").hide();
+         
+         
+         } else {
+         
+         $("#seccionTintas").show();
+         $("#divInputColor").show();
+         }
+         }
+         */
 
     </script>
 

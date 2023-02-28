@@ -12,7 +12,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import com.iudc.security.oauth.CustomerOAuth2UserService;
 import com.iudc.security.oauth.OAuth2LoginSuccessHandler;
 
@@ -23,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired private CustomerOAuth2UserService oAuth2UserService;
 	@Autowired private OAuth2LoginSuccessHandler oauth2LoginHandler;
 	@Autowired private DatabaseLoginSuccessHandler databaseLoginHandler;
-	
+        
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -31,11 +30,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
+		//http.csrf().disable();
+            //http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+            http.authorizeRequests()
                         .antMatchers( "../static/favicon.ico").permitAll()
 			.antMatchers("/account_details", "/update_account_details", "/orders/**",
 					"/cart", "/address_book/**", "/checkout", "/place_order", "/reviews/**", 
-					"/process_paypal_order", "/write_review/**").authenticated()
+					"/process_paypal_order", "/write_review/**","/pedido-cotizacion").authenticated()
 			.anyRequest().permitAll()
 			.and()
 			.formLogin()
@@ -57,8 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.key("1234567890_aBcDeFgHiJkLmNoPqRsTuVwXyZ")
 				.tokenValiditySeconds(14 * 24 * 60 * 60)
 			.and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-			;			
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);			
 	}
 
 	@Override

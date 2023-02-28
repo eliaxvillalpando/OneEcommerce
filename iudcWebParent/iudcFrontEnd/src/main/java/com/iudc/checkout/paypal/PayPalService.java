@@ -74,7 +74,7 @@ public class PayPalService {
 			message = "PayPal server error";
 			
 		default:
-			message = "PayPal codigo de estatus No-Ok";
+			message = "PayPal codigo de estatus NO-Ok";
 		}
 		
 		throw new PayPalApiException(message);

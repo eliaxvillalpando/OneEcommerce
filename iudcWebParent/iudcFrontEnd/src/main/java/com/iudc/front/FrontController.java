@@ -59,7 +59,9 @@ public class FrontController {
         return "index";
     }
 
-    @GetMapping("/front")
+    //@GetMapping("/inicio")
+    //@GetMapping("/front")
+    @GetMapping("/inicio")
     public String viewInicio() throws IOException {
         getIPCliente();
         return "front/inicio";
@@ -100,13 +102,6 @@ public class FrontController {
     private String verPaginaNosotros() {
 
         return "front/nosotros";
-
-    }
-
-    @GetMapping("/test")
-    private String paginaTest() {
-
-        return "front/test";
 
     }
 

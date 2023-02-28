@@ -1,19 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('iudc', 'none')" />
-<body>
-<div class="container-fluid">
-	<div th:replace="navigation :: header_menu"></div>
-	<!--<div th:replace="navigation :: search_nav"></div>-->
-	
-	<div class="text-center border border-secondary rounded m-3 p-3">
-		<h2>Gracias! Tu Orden ha sido completada.</h2>
-		<h4>Te hemos ennviado un correo con la información de tu compra.</h4>
-		<h4>Por favor revisa los detalles en tu cuenta de correo.</h4>
-	</div>
+    <head th:replace="fragments :: page_head('iudc', 'none')" />
+    <link rel="stylesheet" type="text/css" th:href="@{front/stylesFront.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+    <style>
+        body{ height:100vh; margin:0; }
 
-	
-	<div th:replace="navigation :: footer_menu"></div>
-</div>	
-</body>
+        header{ min-height:50px; }
+        footer{ min-height:50px;  }
+
+        /* Trick */
+        body{ 
+            display:flex; 
+            flex-direction:column; 
+        }
+
+        footer{
+            margin-top:auto; 
+        }
+        h1,h2,h3{
+            color:#169FDB; 
+        }
+    </style>
+
+    <body>
+
+        <div th:replace="navigation :: header_menu"></div>
+        <section class="">
+            <div class="row">
+                <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+            </div>
+        </section>
+        <!--<div th:replace="navigation :: search_nav"></div>-->
+
+        <div class="text-center m-3 p-3">
+            <h2>¡Gracias! Tu orden ha sido completada.</h2>
+            <h4>Te hemos enviado un correo con la información de tu compra.</h4>
+            <h4>Por favor revisa los detalles en tu cuenta de correo.</h4>
+        </div>
+
+        <div id="wrapper">
+            <div id="outer">
+                <div class="itemwrapper px-4 text-center">
+                    <img th:src="@{images/tinta.png}" class="centerCotiza" id="borderCarrusel">
+                    <div class="col text-center">
+                        <h2 style="color:#FFD000"><a th:href="@{/productos}">Productos disponibles</a></h2>
+                    </div>
+                </div>
+                <div class="itemwrapper px-4 text-center">
+                    <img th:src="@{images/continuarNavegando.png}" class="centerCotiza" id="borderCarrusel">
+                    <div class="col text-center">
+                        <h2 style="color:#FFD000"><a th:href="@{inicio#productosDispo}">Continuar navegando</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer id="footer">
+            <div th:replace="navigation :: footer_menu"></div>
+        </footer>
+
+
+    </body>
 </html>

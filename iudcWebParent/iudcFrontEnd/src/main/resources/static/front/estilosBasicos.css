@@ -1,0 +1,60 @@
+body{ height:100vh; margin:0; }
+
+header{ min-height:50px; }
+footer{ min-height:50px;  }
+
+/* Trick */
+body{ 
+    display:flex; 
+    flex-direction:column; 
+}
+
+footer{
+    margin-top:auto; 
+}
+h1,h2,h3,h4,h5,h6,h7{
+    color:#169FDB; 
+}
+
+.horizontal-line {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    width: 100%;
+}
+
+.block {
+    flex: 1;
+    height: 100%;
+    position: relative;
+}
+
+.block-1:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #169FDB;
+}
+
+.block-2:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #CE132D;
+}
+
+.block-3:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFD000;
+}

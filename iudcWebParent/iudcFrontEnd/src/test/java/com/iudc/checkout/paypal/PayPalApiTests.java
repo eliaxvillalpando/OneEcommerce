@@ -16,6 +16,8 @@ public class PayPalApiTests {
 	private static final String GET_ORDER_API = "/v2/checkout/orders/";
 	private static final String CLIENT_ID = "AdFi0Ya_xJ1CAkueGUBvdr7JN4JDK8I2bx62LJLQpYD0c2iXk5WQMd7malZgt0ulq5l_buvmVr7iedPn";
 	private static final String CLIENT_SECRET = "EAUrNU4aqxo-YIJ-iclSWhn-rf7G7l6EX4k2TXy5qUM2jycRaoSb_E-kH0-zGbStI7wH5BZNgB2Mc9m-";
+        
+
 	
 	@Test
 	public void testGetOrderDetails() {
@@ -38,4 +40,11 @@ public class PayPalApiTests {
 		System.out.println("Validated: " + orderResponse.validate(orderId));
 		
 	}
+        
+        
+        
+        
+        
+        
+        
 }

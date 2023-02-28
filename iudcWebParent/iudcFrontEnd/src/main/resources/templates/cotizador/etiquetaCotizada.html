@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <html>
+        <head th:replace="fragments :: page_head('Etiqueta cotizada', 'none')" />
+
+        <style>
+            body{ height:100vh; margin:0; }
+
+            header{ min-height:50px; }
+            footer{ min-height:50px;  }
+
+            /* Trick */
+            body{ 
+                display:flex; 
+                flex-direction:column; 
+            }
+
+            footer{
+                margin-top:auto; 
+            }
+            h1,h2,h3{
+                color:#169FDB; 
+            }
+
+            input[type=text], select, textarea {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                margin-top: 6px;
+                margin-bottom: 16px;
+                resize: vertical;
+            }
+
+            input[type=submit] {
+                background-color: #169FDB;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                cursor: pointer;
+            }
+
+            input[type=submit]:hover {
+                background-color: #FFD000;
+            }
+
+            /* Style the container/contact section */
+            .container {
+                border-radius: 5px;
+                /*background-color: #;*/
+                padding: 10px;
+            }
+
+            /* Create two columns that float next to eachother */
+            .column {
+                float: left;
+                width: 50%;
+                margin-top: 6px;
+                padding: 20px;
+            }
+
+            /* Clear floats after the columns */
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+            /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+            @media screen and (max-width: 600px) {
+                .column, input[type=submit] {
+                    width: 100%;
+                    margin-top: 0;
+                }
+
+
+            }
+
+            .botonImpirimir{
+                display: block;
+                width: 115px;
+                height: 25px;
+                background: #4E9CAF;
+                padding: 10px;
+                text-align: center;
+                border-radius: 5px;
+                color: white;
+                font-weight: bold;
+                line-height: 25px;
+            }
+
+            .squareColor{
+                height: 50px;
+                width: 50px;
+
+            }
+            .squareColor2{
+                height: 50px;
+                width: 50px;
+
+            }
+
+            .squareOnlyColor{
+                height: 50px;
+                width: 50px;
+
+            }
+            .form-class {
+                display: inline-block; /* To make the div fit the width of the form content */
+                padding: 1em; /* Add some padding to create a gap between the form content and the border */
+                border: 1px solid black; /* Add a black border with a width of 1 pixel */
+            }
+
+
+
+        </style>
+        <body>
+
+
+            <div th:replace="navigation :: header_menu"></div>
+
+            <section class="">
+                <div class="row">
+                    <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                    <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                    <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+                </div>
+            </section>
+
+            <div class="container-fluid text-center py-3"> 
+                <h1>Resumen</h1>
+            </div>
+
+            <div class="container" id="email-data"> 
+                <div class="row">
+                    <div class="column" id="printableArea">
+                        <table class="table table-striped my-4" id="myTable">
+                            <h2>Información de la etiqueta <img th:src="@{images/ShopmeAdminSmall.png}" style="max-width: 10%"> </h2>
+                            <tbody>
+                                <tr>
+                                    <th scope="col">Superficie de aplicación </th>
+                                    <td>
+                                        <span th:if="${otrasAplicaciones == '' or otrasAplicaciones == null}">[[${tipoAplicacion}]]</span>
+                                        <span th:if="${otrasAplicaciones == 'alimentosRefrigerados'}">Alimentos refrigerados</span>
+                                        <span th:if="${otrasAplicaciones == 'Acero'}">Acero</span>
+                                        <span th:if="${otrasAplicaciones == 'Textil'}">Textil</span>
+                                        <span th:if="${otrasAplicaciones == 'neumaticos'}">Neumaticos</span>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Impresión</th>
+                                    <td>
+                                        <span th:if="${tipoDiseno == 'conDiseno' and clienteDiseno == 'quiereDiseno'}">
+                                            Con impresión y con servicio de diseño
+                                        </span>
+                                        <span th:if="${tipoDiseno == 'conDiseno' and clienteDiseno == 'tieneDiseno'}">
+                                            Con impresión - <b>sin servicio de diseño</b>
+                                        </span>
+                                        <span th:if="${tipoDiseno == 'sinDiseno'}">Sin impresión</span>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <th scope="row">Forma</th>
+                                    <td>
+                                        <span th:if="${tipoForma == 'rectangulo'}">Rectangular</span>
+                                        <span th:if="${tipoForma == 'ovalada'}">Ovalada</span>
+                                        <span th:if="${tipoForma == 'circular'}">Circular</span>
+                                        <span th:if="${tipoForma == 'especial'}">Especial</span>
+                                        <span th:if="${tipoForma == 'continua'}">Continua</span>
+                                        <span th:if="${tipoForma == 'cuadrado'}">Cuadrada</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Medidas</th>
+                                    <td>
+                                        <span th:if="${tipoForma == 'especial'}">Se revisarán detalles con un vendedor</span>
+                                        <span th:if="${tipoForma == 'rectangulo'}">
+                                            Ancho: [[${ancho}]] cm 
+                                            </br>Largo: [[${largo}]] cm</span>
+                                        <span th:if="${tipoForma == 'continua'}">
+                                            Ancho: [[${anchoContinua}]] cm 
+                                            </br>
+                                            Largo: [[${largoContinua}]] m</span>
+                                        <span th:if="${tipoForma == 'ovalada'}">
+                                            Radio 1: [[${radio1}]] cm 
+                                            </br>Radio 2: [[${radio2}]] cm</span>
+                                        <span th:if="${tipoForma == 'cuadrado'}">Lados: [[${ladoCuadrado}]] cm</span>
+                                        <span th:if="${tipoForma == 'circular'}">Diametro: [[${diametroCirculo}]] cm</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Papel</th>
+                                    <td>
+                                        <span th:if="${idPapel == 'boppPermAdhPerm'}">BOPP blanco con adhesivo permanente</span>
+                                        <span th:if="${idPapel == 'boppAdhAgresivo'}">BOPP blanco con adhesivo agresivo</span>
+                                        <span th:if="${idPapel == 'boppTransparente'}">BOPP transparente</span>
+                                        <span th:if="${idPapel == 'pcbPerm'}">PCB couche blanco - Adhesivo permanente</span>
+                                        <span th:if="${idPapel == 'pcbPermSinAdh'}">PCB couche blanco - Sin Adhesivo</span>
+                                        <span th:if="${idPapel == 'pcbCouche'}">PCB couche</span>
+                                        <span th:if="${idPapel == 'pcbHotMelt'}">PCB Hot melt</span>
+                                        <span th:if="${idPapel == 'ttAdhAgreviso'}">Transferencia termica blanco - Adhesivo agresivo</span>
+                                        <span th:if="${idPapel == 'ttAdhPermanente'}">Transferencia termica blanco - Adhesivo permanente</span>
+                                        <span th:if="${idPapel == 'tdPerm'}">TD - Adhesivo permanente</span>
+                                        <span th:if="${idPapel == 'hotMeltAdhPerm'}">Hot Melt - Adhesivo permanente</span>
+                                        <span th:if="${idPapel == 'cartoncillo8'}">Cartoncillo 8 puntos</span>
+                                        <span th:if="${idPapel == 'cartoncillo10'}">Cartoncillo 10 puntos</span>
+                                        <span th:if="${idPapel == 'tykevSinAdh'}">Tyvek con adhesivo</span>
+                                        <span th:if="${idPapel == 'nylonAdh'}">Nylon con adhesivo</span>
+                                        <span th:if="${idPapel == 'nylonSinAdh'}">Nylon sin adhesivo</span>
+                                        <span th:if="${idPapel == 'silverAnchor'}">Silver anchor</span>
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th class="">Color (Valor HEX)</th>
+                                    <td>
+                                        <span th:if="${coloresEtiqueta == 'sinColor'}">Sin color</span>
+                                        <span th:if="${coloresEtiqueta=='' or coloresEtiqueta==null}">NA</span>
+                                        <span th:if="${coloresEtiqueta == '1'}"> [[${seleccionClienteUnColor}]]
+                                            </br>    
+                                            <div class="squareOnlyColor" id="squareOnlyColor"></div>
+                                        </span>
+
+                                        <!--
+                                        <span th:if="${coloresEtiqueta == '2'}">2 Colores 
+                                            </br>Color 1: [[${seleccionClienteColor1}]]
+                                            <div class="squareColor" id="squareColor"></div>
+                                            </br>Color 2: [[${seleccionClienteColor2}]]
+                                            <div class="squareColor2" id="squareColor2"></div>
+                                        </span>
+                                        -->
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Acabado</th>
+                                    <td>
+                                        <span th:if="${tipoLaminado == 'barnizMate'}">Barniz mate</span>
+                                        <span th:if="${tipoLaminado == 'laminadoStd'}">Laminado estándar</span>
+                                        <span th:if="${tipoLaminado == 'laminadoMate'}">Laminado mate</span>
+                                        <span th:if="${tipoLaminado == 'barnizBrillante'}">Barniz brillante</span>
+                                        <span th:if="${tipoLaminado == 'barnizRegistro'}">Barniz a registro</span>
+                                        <span th:if="${tipoLaminado == 'sinRecubrimiento'}">Sin recubrimiento</span>
+                                    </td>
+                                </tr>
+                                <!--
+                                <tr>
+                                    <th scope="row">Esquinas</th>
+                                    <td>
+                                        <span th:if="${tipoEsquina == '' or tipoEsquina == null}">No aplica</span>
+                                        <span th:if="${tipoEsquina ==  'estandar' }">Diametro de 0.3175 cm</span>
+                                        <span th:if="${tipoEsquina ==  'un32avo' }">Diametro de 0.079375 cm</span>
+
+
+                                    </td>
+                                </tr>
+                                -->
+                                <tr>
+                            <div th:if="${tipoDiseno != 'sinDiseno'}">
+                                <th scope="row">Salida</th>
+                                <td>
+                                    <span th:if="${tipoSalidaEtiqueta == 'derechaPorFuera'}">Derecha por fuera</span>
+                                    <span th:if="${tipoSalidaEtiqueta == 'SalidaCabezaPorFuera'}">De cabeza por fuera</span>
+                                    <span th:if="${tipoSalidaEtiqueta == 'SalidaVistaDerechaPorFuera'}">Vista derecha por fuera</span>
+                                    <span th:if="${tipoSalidaEtiqueta == 'SalidaVistaIzquierdaPorFuera'}">Vista izquierda por fuera</span>
+                                    <span th:if="${tipoSalidaEtiqueta == 'derechaPorDentro'}">Derecha por dentro</span>
+                                    <span th:if="${tipoSalidaEtiqueta == 'SalidaCabezaPorDentro'}">De cabeza por dentro</span>
+                                    <span th:if="${tipoSalidaEtiqueta == 'SalidaVistaDerechaPorDentro'}">Derecha por dentro </span>
+                                    <span th:if="${tipoSalidaEtiqueta == 'SalidaVistaIzquierdaPorDentro'}">Vista izquierda por dentro</span>
+                                </td>
+                            </div>
+                            <div th:if="${tipoDiseno == 'sinDiseno'}">
+                                <th scope="row">Salida</th>
+                                <td>
+                                    <span>NA</span>
+                                </td>
+                            </div>
+                            </tr>
+                            <tr>
+                                <th scope="row">Presentación</th>
+                                <td>
+
+                                    <span th:if="${presentacion == '3Pulgadas'}">Rollo con centro de 7.62 cm - 3 in</span>
+                                    <span th:if="${presentacion == '1Pulgada'}">Rollo con centro de 2.54 cm - 1 in</span>
+                                    <span th:if="${presentacion == 'fanFolding'}">Fan folding</span>
+                                    <span th:if="${presentacion == 'posteta'}">Posteta</span>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row">Precio por millar</th>
+                                <td>
+                                    [[${precioMillar}]]
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Minimo de fabriación</th>
+                                <td>
+                                    [[${minimoFabricacion}]]
+                                </td>
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                        <div class="text-center">
+                            <p>Cotizado por Impresores Unidos del Centro <p id="date"></p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-6">
+
+                        <div class="column text-center py-4">
+                            <form id="email-form" class="py-4">
+                                <label for="fname">Enviar por Correo <i class="fas fa-solid fa-envelope" style="color:#CF3650"></i></label>
+                                <input type="email" id="recipient" placeholder="tucorreo@empresa.com" required>
+                                <!--<input type="hidden" id="contextPath" value="<%=request.getContextPath()%>" readonly></input>-->
+                                </br>
+
+                                <input class="my-3" type="submit" value="Enviar">
+
+                            </form>
+
+
+                            <div class="py-4"> 
+                                <a onclick="printPageArea('printableArea')"><input type="submit" value="Imprimir"></a>
+                            </div>
+
+
+
+                            <div sec:authorize="isAuthenticated()" class="py-4 border">
+                                <form> <!-- th:action="@{/pedido-cotizacion}" -->
+                                    <p>Cantidad para el pedido:</p>
+                                    <input type="radio" id="opcion1" name="opcion" value="1">
+                                    <label for="opcion1">70 millares</label><br>
+                                    <input type="radio" id="opcion2" name="opcion" value="2">
+                                    <label for="opcion2">50 millares</label><br>
+                                    <input type="radio" id="opcion3" name="opcion" value="3">
+                                    <label for="opcion3">100 millares</label><br>
+                                    <p>Otra cantidad:</p> <input type="number" id="otraOpcion" value="otraOpcion">
+                                    <div class="py-4"> 
+                                        <input type="submit" value="Generar pedido">
+                                    </div>
+                                    <div class="py-4"> 
+                                    </div>
+                                </form>
+                            </div>
+                            <div sec:authorize="!isAuthenticated()" class="form-class">
+                                <p>Cantidad para el pedido:</p>
+                                <input type="radio" id="opcion1" name="opcion" value="1">
+                                <label for="opcion1">70</label><br>
+                                <input type="radio" id="opcion2" name="opcion" value="2">
+                                <label for="opcion2">50</label><br>
+                                <input type="radio" id="opcion3" name="opcion" value="3">
+                                <label for="opcion3">100</label><br>
+                                <p>Otra cantidad:</p> <input type="number" id="otraOpcion" value="otraOpcion">
+                                <div class="py-4"> 
+                                    <input type="submit" value="Iniciar sesión y generar pedido">
+                                </div>
+
+
+                            </div>
+
+
+                            <form id="myForm">
+                                <!-- your form inputs go here -->
+                                <input id="myButton" type="submit" value="Send Values">
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <footer id="footer">
+                <div th:replace="navigation :: footer_menu"></div>
+            </footer>
+
+            <script>
+
+                var csrfHeaderName = "[[${_csrf.headerName}]]";
+                var csrfValue = "[[${_csrf.token}]]";
+
+                const myForm = document.getElementById('myForm');
+
+                // Add an event listener for the form's submit event
+                myForm.addEventListener('submit', (event) => {
+                    event.preventDefault(); // Prevent the form from actually submitting
+
+                    // Call your function here
+                    sendValues();
+                });
+
+
+                function sendValues() {
+                    var tds = document.querySelectorAll("#myTable td");
+                    var values = [];
+                    for (var i = 0; i < tds.length; i++) {
+                        values.push(tds[i].innerText);
+                    }
+
+                    var data = values;
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'http://localhost/iudc/crear-pedido-cotizacion',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader(csrfHeaderName, csrfValue);
+                        },
+                        data: JSON.stringify(data),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "text"
+                    }).done(function (response) {
+                        // handle success response from controller
+                        alert("Datos enviados");
+                     window.location.href = "/iudc/pedido-cotizacion";
+                     //$("#divPedidoCotizacion").html(response);
+                    }).fail(function (xhr, status, error) {
+                        // handle error response from controller
+                        alert("Error " + status + xhr);
+                    });
+                }
+
+            </script>
+
+
+
+            <script th:inline="javascript">
+
+
+
+                pintarCuadrados();
+                function pintarCuadrados() {
+                    n = new Date();
+                    y = n.getFullYear();
+                    m = n.getMonth() + 1;
+                    d = n.getDate();
+                    document.getElementById("date").innerHTML = m + "/" + d + "/" + y;
+                    var unicoColor = [[${seleccionClienteUnColor}]];
+                    document.getElementById("squareOnlyColor").style.backgroundColor = unicoColor;
+                    //alert(color1 + color2 + unicoColor);
+
+
+                }
+
+
+                function printPageArea(areaID) {
+
+
+                    var printContent = document.getElementById(areaID).innerHTML;
+                    var originalContent = document.body.innerHTML;
+                    document.body.innerHTML = printContent;
+                    window.print();
+                    document.body.innerHTML = originalContent;
+                }
+
+
+            </script>
+
+            <script>
+
+
+                var csrfHeaderName = "[[${_csrf.headerName}]]";
+                var csrfValue = "[[${_csrf.token}]]";
+                $("#email-form").submit(function (event) {
+                    var table = $('#myTable');
+                    var thElements = [];
+                    var tdElements = [];
+                    table.find("th").each(function () {
+                        thElements.push($(this).text());
+                    });
+                    table.find("td").each(function () {
+                        tdElements.push($(this).text().trim().replace(/\n/g, '  '));
+                    });
+                    event.preventDefault();
+                    var recipient = $("#recipient").val();
+                    var subject = $("#subject").val();
+                    var content = $("#content").val();
+                    $.ajax({
+                        type: 'POST',
+                        url: 'http://localhost/iudc/enviar-cotizacion',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader(csrfHeaderName, csrfValue);
+                        },
+                        data: {
+                            recipient: recipient,
+                            thElements: JSON.stringify(thElements.join(",")),
+                            tdElements: JSON.stringify(tdElements.join(","))
+                        }
+
+                    }).done(function () {
+
+                        console.log("Email sent successfully" + tdElements);
+                        window.location = '/iudc/cotizacion-enviada';
+                    }).fail(function () {
+                        console.log("Error sending email" + thElements);
+                    });
+                });
+
+
+            </script>
+
+
+        </body>
+    </html>

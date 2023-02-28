@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head th:replace="fragments :: page_head('Pedido de cotización', 'none')" />
+    <link rel="stylesheet" type="text/css" th:href="@{front/estilosBasicos.css}" />
+    <body>
+
+        <div th:replace="navigation :: header_menu"></div>
+        <div th:replace="front/fragmentosEstilos :: lineaImpresores"></div>
+
+        <div class="row m-1 py-4" id="divPedidoCotizacion">
+            <div class="col-sm-8">
+
+                <div class="card">
+                    <div class="card-header"><h5>Información de envio</h5></div>
+                    <div class="card-body">
+                        <p>
+                            <b>Enviar a:</b>&nbsp; [[${shippingAddress}]]
+                            <a th:href="@{/address_book(redirect=checkout)}" style="color: #169FDB">[Enviar a otra dirección]</a>
+                        </p>
+
+                        <p>
+                            <b>Días de entrega: 15 días</b>
+                        </p>
+
+                    </div>
+                </div>
+
+
+                <div class="card mt-3 mb-3">
+                    <div class="card-header"><h5>Metodo de pago</h5></div>
+
+                    <div class="card-body">
+                        <div id="paypal-button-container"></div>
+                        <form th:action="@{/process_paypal_order}" method="post" id="paypalForm">
+                            <input type="hidden" name="orderId" id="orderId" />
+                            <input type="hidden" name="paymentMethod" value="PAYPAL" />
+                        </form>
+                    </div>			
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header"><h5>Resúmen del pedido</h5></div>
+                    <div>
+                        <table>
+                            <th:block th:each="item : ${cartItems}">
+                                <tr th:with="product = ${item.product}">
+                                    <td>[[${item.quantity}]] X &nbsp;&nbsp;</td>
+                                    <td width="70%">
+                                        <a th:href="@{'/p/' + ${product.alias}}" target="_blank">
+                                            [[${product.shortName}]]
+                                        </a>
+                                        <br/>
+                                        <small>Enviar: <div th:replace="fragments :: format_currency(${item.shippingCost})"></div></small>
+                                    </td>
+                                    <td>
+                                        <div th:replace="fragments :: format_currency(${item.subtotal})">
+                                    </td>
+                                </tr>
+                            </th:block>
+                            <tr><td colspan="3"><hr/></tr>
+                        </table>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col">Total producto(s): </div>
+                        <div class="col"><div th:replace="fragments :: format_currency(${checkoutInfo.productTotal})"></div></div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col">Total de envió: </div>
+                        <div class="col"><div th:replace="fragments :: format_currency(${checkoutInfo.shippingCostTotal})"></div></div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col">Pago total: </div>
+                        <div class="col"><b><div>20</div></b></div>
+                    </div>
+
+                </div>		
+            </div>		
+        </div>
+            <div>Test: [[${aplicacion}]]</div>
+
+        <footer>
+            <div th:replace="navigation :: footer_menu"></div>
+        </footer>
+
+
+
+        <script th:src="@{https://www.paypal.com/sdk/js(client-id=${paypalClientId},currency=${currencyCode})}"></script>
+        <script type="text/javascript" th:src="@{/js/common_modal.js}"></script>
+        <script type="text/javascript">
+            contextPath = "[[@{/}]]";
+            var csrfHeaderName = "[[${_csrf.headerName}]]";
+            var csrfValue = "[[${_csrf.token}]]";
+
+            $(document).ready(function () {
+                $("#radioCOD").on("click", function () {
+                    $("#buttonSubmit").removeClass("d-none");
+                });
+            });
+
+            function validateOrder(orderId) {
+                $("#orderId").val(orderId);
+                $("#paypalForm").submit();
+            }
+
+            paypal.Buttons({
+                enableStandardCardFields: true,
+                createOrder: function (data, actions) {
+                    // setup a transaction
+                    return actions.order.create({
+
+                        intent: 'CAPTURE', // make payment immediately
+                        payer: {
+                            name: {
+                                given_name: "[[${customer.firstName}]]",
+                                surname: "[[${customer.lastName}]]"
+                            },
+
+                            address: {
+                                address_line_1: "[[${customer.addressLine1}]]",
+                                address_line_2: "[[${customer.addressLine2}]]",
+                                admin_area_1: "[[${customer.state}]]",
+                                admin_area_2: "[[${customer.city}]]",
+                                postal_code: "[[${customer.postalCode}]]",
+                                country_code: "[[${customer.country.code}]]"
+                            },
+
+                            email_address: "[[${customer.email}]]",
+
+                            phone: {
+                                phone_type: "MOBILE",
+                                phone_number: {
+                                    national_number: "[[${customer.phoneNumber}]]"
+                                }
+                            }
+                        },
+
+                        purchase_units: [{
+                                amount: {
+                                    value: "[[${checkoutInfo.paymentTotal4PayPal}]]",
+                                    currency_code: "[[${currencyCode}]]"
+                                }
+                            }],
+
+                        application_context: {
+                            shipping_preference: "NO_SHIPPING"
+                        }
+                    });
+                },
+
+                onApprove: function (data, actions) {
+                    // buyer approved payment
+                    return actions.order.capture().then(function (details) {
+                        //console.log(details);
+                        orderId = details.id;
+                        validateOrder(orderId);
+                    });
+                },
+
+                onCancel: function (data) {
+                    // buyer cancelled payment
+                    alert('Pago cancelado por el comprador');
+                },
+
+                onError: function (err) {
+                    // error that prevents buyer from doing checkout
+                    showErrorModal("Algo salio mal con tu dirección, el pago no fue procesado.");
+                }
+            }).render("#paypal-button-container");
+
+        </script>
+
+    </body>
+</html>

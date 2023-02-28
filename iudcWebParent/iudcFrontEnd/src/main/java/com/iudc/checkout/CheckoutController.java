@@ -170,5 +170,5 @@ public class CheckoutController {
 		model.addAttribute("message", message);
 		
 		return "message";
-	}
+	}      
 }

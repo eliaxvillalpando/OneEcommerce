@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <html>
+        <head th:replace="fragments :: page_head('Etiqueta cotizada', 'none')" />
+
+        <style>
+            body{ height:100vh; margin:0; }
+
+            header{ min-height:50px; }
+            footer{ min-height:50px;  }
+
+            /* Trick */
+            body{ 
+                display:flex; 
+                flex-direction:column; 
+            }
+
+            footer{
+                margin-top:auto; 
+            }
+            h1,h2,h3{
+                color:#169FDB; 
+            }
+
+            input[type=text], select, textarea {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                margin-top: 6px;
+                margin-bottom: 16px;
+                resize: vertical;
+            }
+
+        </style>
+        <body>
+
+
+            <div th:replace="navigation :: header_menu"></div>
+
+
+
+
+
+            <section class="">
+                <div class="row">
+                    <div class="col" style="background-color:#169FDB; color: #169FDB;">a</div>
+                    <div class="col" style="background-color:#CE132D; color: #CE132D;">a</div>
+                    <div class="col" style="background-color:#FFD000; color: #FFD000;">a</div>
+                </div>
+            </section>
+
+            <div class="container-fluid text-center py-3"> 
+                <h1>Socket test</h1>
+            </div>
+
+
+
+            <table class="table" id="myTable">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <form id="email-form"  >
+                <input type="email" id="recipient" placeholder="Recipient">
+                <input type="text" id="subject" placeholder="Subject">
+                <textarea id="content" placeholder="Message"></textarea>
+                <button type="submit">Send</button>
+            </form>
+
+
+
+
+
+
+            <footer id="footer">
+                <div th:replace="navigation :: footer_menu"></div>
+            </footer>
+
+            <script type="text/javascript">
+
+
+                var csrfHeaderName = "[[${_csrf.headerName}]]";
+                var csrfValue = "[[${_csrf.token}]]";
+
+                let table = document.getElementById("myTable");
+                let rows = table.rows;
+                let tableContent = "";
+                for (let i = 0; i < rows.length; i++) {
+                    let cells = rows[i].cells;
+                    for (let j = 0; j < cells.length; j++) {
+                        tableContent += cells[j].innerText + " ";
+                    }
+                    tableContent += "\n";
+                }
+
+
+                $("#email-form").submit(function (event) {
+                    event.preventDefault();
+
+                    var recipient = $("#recipient").val();
+                    var subject = $("#subject").val();
+                    var content = $("#content").val();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'http://localhost/iudc/test/send-email-test',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader(csrfHeaderName, csrfValue);
+                        },
+                        data: {
+                            recipient: recipient,
+                            subject: subject,
+                            content: content,
+                            tableContent: tableContent
+                        }
+
+                    }).done(function () {
+                        console.log("Email sent successfully");
+                    }).fail(function () {
+                        console.log("Error sending email: " + error);
+                    });
+
+                    setTimeout(correoEnviado, 3000);
+
+                });
+
+
+                function correoEnviado() {
+                    alert("Correo enviado");
+                }
+
+            </script>  
+
+        </body>
+    </html>
