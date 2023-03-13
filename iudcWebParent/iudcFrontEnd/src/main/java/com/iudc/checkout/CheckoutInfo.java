@@ -68,8 +68,8 @@ public class CheckoutInfo {
 	}
 	
 	public String getPaymentTotal4PayPal() {
-		DecimalFormat formatter = new DecimalFormat("##.##"); //Esto permite que en el checkout al pagar, puedas tener cigras de miles (usd)
+		DecimalFormat formatter = new DecimalFormat("##.##"); //Esto permite que en el checkout al pagar, puedas tener cifras de miles (usd)
 		return formatter.format(paymentTotal);
 	}
-
+        
 }

@@ -77,13 +77,36 @@ public class PedidoDeCotizacionController {
             return "redirect:/cart";
         }
         List<CartItem> cartItems = cartService.listCartItems(customer);
-        CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
+        //CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
 
+        
+        
         String currencyCode = settingService.getCurrencyCode();
         PaymentSettingBag paymentSettings = settingService.getPaymentSettings();
         String paypalClientId = paymentSettings.getClientID();
         
         String aplicacion = productoCotizacion.getSuperficieAplicacion();
+        String medidas = productoCotizacion.getMedidas();
+        String papel = productoCotizacion.getPapel();
+        String presentacion = productoCotizacion.getPresentacion();
+        String impresion = productoCotizacion.getImpresion();
+        String forma = productoCotizacion.getForma();
+        String color = productoCotizacion.getColor();
+        String superficie = productoCotizacion.getSuperficieAplicacion();
+        String salidaEtiqueta = productoCotizacion.getSalida();
+        
+        
+        double precioMillarDbl = productoCotizacion.getPrecioMillar();
+        double minimoFabricacionDbl = productoCotizacion.getMinimoFabricacion();
+        double cantidadPedidoDbl = productoCotizacion.getCantidadPedido();
+        double costoEnvio = 350.5;
+        double totalPedido = productoCotizacion.getCantidadPedido() * productoCotizacion.getPrecioMillar();
+        //double totalConEnvio = totalPedido + checkoutInfo.getShippingCostTotal();
+        double totalConEnvio = totalPedido + costoEnvio;
+        CheckoutInfo checkoutInfo = new CheckoutInfo();
+        checkoutInfo.setPaymentTotal((float) totalConEnvio);
+        
+        
         
         model.addAttribute("aplicacion", aplicacion);
         model.addAttribute("paypalClientId", paypalClientId);
@@ -91,8 +114,24 @@ public class PedidoDeCotizacionController {
         model.addAttribute("customer", customer);
         model.addAttribute("checkoutInfo", checkoutInfo);
         model.addAttribute("cartItems", cartItems);
+        model.addAttribute("cantidadPedidoDbl", cantidadPedidoDbl);
+        model.addAttribute("minimoFabricacionDbl", minimoFabricacionDbl);
+        model.addAttribute("precioMillarDbl", precioMillarDbl);
+        model.addAttribute("costoEnvio", costoEnvio);
+        model.addAttribute("totalPedido", totalPedido);
+        model.addAttribute("totalConEnvio", totalConEnvio);
+        model.addAttribute("medidas", medidas);
+        model.addAttribute("papel", papel);
+        model.addAttribute("presentacion", presentacion);
+        model.addAttribute("impresion", impresion);
+        model.addAttribute("forma", forma);
+        model.addAttribute("color", color);
+        model.addAttribute("superficie", superficie);
+        model.addAttribute("salidaEtiqueta", salidaEtiqueta);
 
-        return "cart/shopping_cart";
+
+        //return "cart/shopping_cart";
+        return "front/pedido-cotizacion";
 
     }
 
@@ -113,6 +152,7 @@ public class PedidoDeCotizacionController {
             datosFormato.add(replaced);
         }
 
+        //String cantidadPedido = request.getParameter("cantidadPedido");
         String superficieAplicacion = datosFormato.get(0);
         String impresion = datosFormato.get(1);
         String forma = datosFormato.get(2);
@@ -125,7 +165,7 @@ public class PedidoDeCotizacionController {
 
         String precioMillar = datosFormato.get(9);
         String minimoFabricacion = datosFormato.get(10);
-        String cantidadPedido = datosFormato.get(10);
+        String cantidadPedido = datosFormato.get(datosFormato.size() - 1);
         double precioMillarDbl = Double.parseDouble(precioMillar);
         double minimoFabricacionDbl = Double.parseDouble(minimoFabricacion);
         double cantidadPedidoDbl = Double.parseDouble(cantidadPedido);
@@ -155,12 +195,12 @@ public class PedidoDeCotizacionController {
         
         int codigoCotizacionId = productoCotizacion.getId();
         int quantity = productoCotizacion.getCantidadPedido().intValue();
-        shoppingCartController.addCotizacionPedidoToCart(codigoCotizacionId, quantity, customer);
+        //shoppingCartController.addCotizacionPedidoToCart(codigoCotizacionId, quantity, customer);
         //datosPaypal(model, request);
         
-        return "cart/shopping_cart";
+        //return "cart/shopping_cart";
         
-        //return "front/pedido-cotizacion";
+        return "front/pedido-cotizacion";
      
     }
     

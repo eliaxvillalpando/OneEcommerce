@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.iudc.setting.SettingService;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import javax.activation.DataHandler;
 import java.io.File;
-import javax.mail.BodyPart;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
@@ -63,11 +61,11 @@ public class CotizadorController {
             @RequestParam(required = false, name = "presentacion") String presentacion,
             HttpServletRequest request,
             Model model) throws MessagingException, UnsupportedEncodingException {
-        
+
         Double precioMillar = 245.43;
         Double minimoFabricacion = 25.0;
-        
-        if(tipoDiseno == "conDiseno"){
+
+        if (tipoDiseno == "conDiseno") {
             coloresEtiqueta = null;
         }
 
@@ -92,14 +90,11 @@ public class CotizadorController {
         model.addAttribute("seleccionClienteUnColor", seleccionClienteUnColor);
         model.addAttribute("precioMillar", precioMillar);
         model.addAttribute("minimoFabricacion", minimoFabricacion);
-        
-        
-        
 
         return "cotizador/etiquetaCotizada";
 
     }
-    
+
     @PostMapping("/enviar-cotizacion")
     public String sendEmail(@RequestParam("recipient") String recipient, @RequestParam("thElements") String[] thElements, @RequestParam("tdElements") String[] tdElements) throws MessagingException, IOException {
         // Set up the email
@@ -155,7 +150,6 @@ public class CotizadorController {
 
         helper.setSubject("Cotización Impresores Unidos del Centro");
         helper.setTo(recipient);
-        
 
         mail.setContent(multipart);
         mailSender.send(mail);

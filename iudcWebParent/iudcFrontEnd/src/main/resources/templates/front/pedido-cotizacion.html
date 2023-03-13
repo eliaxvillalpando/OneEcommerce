@@ -3,6 +3,10 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head th:replace="fragments :: page_head('Pedido de cotización', 'none')" />
     <link rel="stylesheet" type="text/css" th:href="@{front/estilosBasicos.css}" />
+    <style>
+        
+
+    </style>
     <body>
 
         <div th:replace="navigation :: header_menu"></div>
@@ -16,7 +20,7 @@
                     <div class="card-body">
                         <p>
                             <b>Enviar a:</b>&nbsp; [[${shippingAddress}]]
-                            <a th:href="@{/address_book(redirect=checkout)}" style="color: #169FDB">[Enviar a otra dirección]</a>
+                            
                         </p>
 
                         <p>
@@ -42,47 +46,118 @@
 
             <div class="col-sm-4">
                 <div class="card">
-                    <div class="card-header"><h5>Resúmen del pedido</h5></div>
+                    <div class="card-header"><h5>Resúmen del producto</h5></div>
                     <div>
-                        <table>
-                            <th:block th:each="item : ${cartItems}">
-                                <tr th:with="product = ${item.product}">
-                                    <td>[[${item.quantity}]] X &nbsp;&nbsp;</td>
-                                    <td width="70%">
-                                        <a th:href="@{'/p/' + ${product.alias}}" target="_blank">
-                                            [[${product.shortName}]]
-                                        </a>
-                                        <br/>
-                                        <small>Enviar: <div th:replace="fragments :: format_currency(${item.shippingCost})"></div></small>
-                                    </td>
-                                    <td>
-                                        <div th:replace="fragments :: format_currency(${item.subtotal})">
-                                    </td>
+
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+
+                                    <td>Aplicacion</td>
+                                    <td> [[${aplicacion}]]</td>
+
                                 </tr>
-                            </th:block>
-                            <tr><td colspan="3"><hr/></tr>
+                                <tr>
+
+                                    <td>Medidas</td>
+                                    <td>[[${medidas}]]</td>
+
+                                </tr>
+                                
+                                <tr>
+
+                                    <td>Papel</td>
+                                    <td>[[${papel}]]</td>
+
+                                </tr>
+                                
+                                <tr>
+
+                                    <td>Presentación</td>
+                                    <td>[[${presentacion}]]</td>
+
+                                </tr>
+                                
+                                <tr>
+
+                                    <td>Impresión</td>
+                                    <td>[[${impresion}]]</td>
+
+                                </tr>
+                                
+                                <tr>
+
+                                    <td>Forma</td>
+                                    <td>[[${forma}]]</td>
+
+                                </tr>
+                                
+                                <tr>
+
+                                    <td>Color</td>
+                                    <td>[[${color}]]</td>
+
+                                </tr>
+                               
+                                   <tr>
+
+                                    <td>Superficie de aplicación</td>
+                                    <td>[[${superficie}]]</td>
+
+                                </tr>
+                                
+                                 <tr>
+
+                                    <td>Salida etiqueta</td>
+                                    <td>[[${salidaEtiqueta}]]</td>
+
+                                </tr>
+                               
+                                
+                                <tr>
+
+                                    <td>Cantidad del pedido</td>
+                                    <td> [[${cantidadPedidoDbl}]]</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>Precio por millar</td>
+                                    <td> [[${precioMillarDbl}]]</td>
+                                </tr>
+                                <tr>
+
+                                    <td>Minimo de fabricación</td>
+                                    <td> [[${precioMillarDbl}]]</td>
+
+                                </tr>
+
+                            </tbody>
                         </table>
+
                     </div>
 
                     <div class="row mt-2">
                         <div class="col">Total producto(s): </div>
-                        <div class="col"><div th:replace="fragments :: format_currency(${checkoutInfo.productTotal})"></div></div>
+                        <!--<div class="col"><div th:replace="fragments :: format_currency(${checkoutInfo.productTotal})"></div></div>-->
+                        <div class="col"><div> [[${cantidadPedidoDbl}]] millares</div></div>
+                        
                     </div>
 
                     <div class="row mt-2">
                         <div class="col">Total de envió: </div>
-                        <div class="col"><div th:replace="fragments :: format_currency(${checkoutInfo.shippingCostTotal})"></div></div>
+                        <div class="col"><div th:replace="fragments :: format_currency(${costoEnvio})"></div></div>
                     </div>
 
                     <div class="row mt-2">
                         <div class="col">Pago total: </div>
-                        <div class="col"><b><div>20</div></b></div>
+                        <div class="col"><b><div th:replace="fragments :: format_currency(${totalConEnvio})"></div></b></div>
                     </div>
 
                 </div>		
             </div>		
         </div>
-            <div>Test: [[${aplicacion}]]</div>
+    
 
         <footer>
             <div th:replace="navigation :: footer_menu"></div>

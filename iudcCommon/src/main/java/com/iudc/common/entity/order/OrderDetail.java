@@ -8,6 +8,7 @@ import javax.persistence.Table;
 import com.iudc.common.entity.Category;
 import com.iudc.common.entity.IdBasedEntity;
 import com.iudc.common.entity.product.Product;
+import com.iudc.common.entity.product.ProductoCotizador;
 
 @Entity
 @Table(name = "order_details")
@@ -25,6 +26,12 @@ public class OrderDetail extends IdBasedEntity {
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
+        
+        //Modificacion para usar trazabilidad de order_details con productos del cotizador
+        @ManyToOne
+        @JoinColumn(name = "cotizador_codigo", referencedColumnName = "codigoCotizacion")
+        private ProductoCotizador productoCotizador;
+        
 	
 	public OrderDetail() {
 	}

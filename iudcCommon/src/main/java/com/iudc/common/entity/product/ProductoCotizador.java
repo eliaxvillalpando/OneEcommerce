@@ -61,7 +61,6 @@ public class ProductoCotizador extends IdBasedEntity{
     @Column(name = "codigoCotizacion")
     private String codigoCotizacion;
 
-
     @PostPersist
     public void setCodigoCotizacion() {
         codigoCotizacion = "Cotizacion-" + String.format("%d", id);

@@ -5,21 +5,21 @@
 
         body{ height:100vh; margin:0; }
 
-            header{ min-height:50px; }
-            footer{ min-height:50px;  }
+        header{ min-height:50px; }
+        footer{ min-height:50px;  }
 
-            /* Trick */
-            body{ 
-                display:flex; 
-                flex-direction:column; 
-            }
+        /* Trick */
+        body{ 
+            display:flex; 
+            flex-direction:column; 
+        }
 
-            footer{
-                margin-top:auto; 
-            }
-            h1,h2,h3{
-                color:#169FDB; 
-            }
+        footer{
+            margin-top:auto; 
+        }
+        h1,h2,h3{
+            color:#169FDB; 
+        }
 
         .horizontal-line {
             display: flex;
@@ -66,115 +66,115 @@
 
     </style>
     <body>
-        
-            <div th:replace="navigation :: header_menu"></div>
-            <!--<div th:replace="navigation :: search_nav"></div>-->
-            <div class="row">
-                <section class="horizontal-line">
-                    <div class="block block-1"></div>
-                    <div class="block block-2"></div>
-                    <div class="block block-3"></div>
-                </section>
-            </div>
+
+        <div th:replace="navigation :: header_menu"></div>
+        <!--<div th:replace="navigation :: search_nav"></div>-->
+        <div class="row">
+            <section class="horizontal-line">
+                <div class="block block-1"></div>
+                <div class="block block-2"></div>
+                <div class="block block-3"></div>
+            </section>
+        </div>
 
 
-            <div class="text-center py-4">
-                <h2>Revisar pedido</h2>
-            </div>
+        <div class="text-center py-4">
+            <h2>Revisar pedido</h2>
+        </div>
 
-            <div class="row m-1">
-                <div class="col-sm-8">
-                    <div class="card">
-                        <div class="card-header"><h5>Información de envio</h5></div>
-                        <div class="card-body">
-                            <p>
-                                <b>Enviar a:</b>&nbsp; [[${shippingAddress}]]
-                                <a th:href="@{/address_book(redirect=checkout)}" style="color: #169FDB">[Enviar a otra dirección]</a>
-                            </p>
-                            <p>
-                                <b>Días de entrega: </b>[[${checkoutInfo.deliverDays}]] day(s)
-                            </p>
-                            <p>
-                                <b>Fecha de entrega estimada: </b>[[${#dates.format(checkoutInfo.deliverDate, 'E, dd MMM yyyy')}]]
-                            </p>
-                        </div>
-                    </div>		
-
-                    <div class="card mt-3 mb-3">
-                        <div class="card-header"><h5>Metodo de pago</h5></div>
-                        
-                        <div class="card-body">
-                            <div th:if="${checkoutInfo.codSupported}">
-                                <form th:action="@{/place_order}" method="post">
-                                    <p>
-
-                                        <input type="radio" name="paymentMethod" id="radioCOD" value="COD" /> Credito/Efecitvo
-                                        &nbsp;
-                                        <button class="btn btn-primary d-none" type="submit" id="buttonSubmit">Hacer orden con Credito/Efecitvo</button>
-                                    </p>
-                                </form>
-                            </div>
-
-                            <div id="paypal-button-container"></div>
-                            <form th:action="@{/process_paypal_order}" method="post" id="paypalForm">
-                                <input type="hidden" name="orderId" id="orderId" />
-                                <input type="hidden" name="paymentMethod" value="PAYPAL" />
-                            </form>
-                        </div>			
+        <div class="row m-1">
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-header"><h5>Información de envio</h5></div>
+                    <div class="card-body">
+                        <p>
+                            <b>Enviar a:</b>&nbsp; [[${shippingAddress}]]
+                            <a th:href="@{/address_book(redirect=checkout)}" style="color: #169FDB">[Enviar a otra dirección]</a>
+                        </p>
+                        <p>
+                            <b>Días de entrega: </b>[[${checkoutInfo.deliverDays}]] day(s)
+                        </p>
+                        <p>
+                            <b>Fecha de entrega estimada: </b>[[${#dates.format(checkoutInfo.deliverDate, 'E, dd MMM yyyy')}]]
+                        </p>
                     </div>
-                </div>
-
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-header"><h5>Resúmen del pedido</h5></div>
-                        <div class="card-body">
-                            <div>
-                                <table>
-                                    <th:block th:each="item : ${cartItems}">
-                                        <tr th:with="product = ${item.product}">
-                                            <td>[[${item.quantity}]] X &nbsp;&nbsp;</td>
-                                            <td width="70%">
-                                                <a th:href="@{'/p/' + ${product.alias}}" target="_blank">
-                                                    [[${product.shortName}]]
-                                                </a>
-                                                <br/>
-                                                <small>Enviar: <div th:replace="fragments :: format_currency(${item.shippingCost})"></div></small>
-                                            </td>
-                                            <td>
-                                                <div th:replace="fragments :: format_currency(${item.subtotal})">
-                                            </td>
-                                        </tr>
-                                    </th:block>
-                                    <tr><td colspan="3"><hr/></tr>
-                                </table>
-                            </div>
-
-                            <div class="row mt-2">
-                                <div class="col">Total producto(s): </div>
-                                <div class="col"><div th:replace="fragments :: format_currency(${checkoutInfo.productTotal})"></div></div>
-                            </div>
-
-                            <div class="row mt-2">
-                                <div class="col">Total de envió: </div>
-                                <div class="col"><div th:replace="fragments :: format_currency(${checkoutInfo.shippingCostTotal})"></div></div>
-                            </div>
-
-                            <div class="row mt-2">
-                                <div class="col">Pago total: </div>
-                                <div class="col"><b><div th:replace="fragments :: format_currency(${checkoutInfo.paymentTotal})"></div></b></div>
-                            </div>										
-                        </div>
-                    </div>		
                 </div>		
+
+                <div class="card mt-3 mb-3">
+                    <div class="card-header"><h5>Metodo de pago</h5></div>
+
+                    <div class="card-body">
+                        <div th:if="${checkoutInfo.codSupported}">
+                            <form th:action="@{/place_order}" method="post">
+                                <p>
+
+                                    <input type="radio" name="paymentMethod" id="radioCOD" value="COD" /> Credito/Efecitvo
+                                    &nbsp;
+                                    <button class="btn btn-primary d-none" type="submit" id="buttonSubmit">Hacer orden con Credito/Efecitvo</button>
+                                </p>
+                            </form>
+                        </div>
+
+                        <div id="paypal-button-container"></div>
+                        <form th:action="@{/process_paypal_order}" method="post" id="paypalForm">
+                            <input type="hidden" name="orderId" id="orderId" />
+                            <input type="hidden" name="paymentMethod" value="PAYPAL" />
+                        </form>
+                    </div>			
+                </div>
             </div>
 
-            <div th:replace="fragments :: modal_dialog"></div>
-            
-            
-             <footer>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header"><h5>Resúmen del pedido</h5></div>
+                    <div class="card-body">
+                        <div>
+                            <table>
+                                <th:block th:each="item : ${cartItems}">
+                                    <tr th:with="product = ${item.product}">
+                                        <td>[[${item.quantity}]] X &nbsp;&nbsp;</td>
+                                        <td width="70%">
+                                            <a th:href="@{'/p/' + ${product.alias}}" target="_blank">
+                                                [[${product.shortName}]]
+                                            </a>
+                                            <br/>
+                                            <small>Enviar: <div th:replace="fragments :: format_currency(${item.shippingCost})"></div></small>
+                                        </td>
+                                        <td>
+                                            <div th:replace="fragments :: format_currency(${item.subtotal})">
+                                        </td>
+                                    </tr>
+                                </th:block>
+                                <tr><td colspan="3"><hr/></tr>
+                            </table>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col">Total producto(s): </div>
+                            <div class="col"><div th:replace="fragments :: format_currency(${checkoutInfo.productTotal})"></div></div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col">Total de envió: </div>
+                            <div class="col"><div th:replace="fragments :: format_currency(${checkoutInfo.shippingCostTotal})"></div></div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col">Pago total: </div>
+                            <div class="col"><b><div th:replace="fragments :: format_currency(${checkoutInfo.paymentTotal})"></div></b></div>
+                        </div>										
+                    </div>
+                </div>		
+            </div>		
+        </div>
+
+        <div th:replace="fragments :: modal_dialog"></div>
+
+
+        <footer>
             <div th:replace="navigation :: footer_menu"></div>
         </footer>
-        
+
         <script th:src="@{https://www.paypal.com/sdk/js(client-id=${paypalClientId},currency=${currencyCode})}"></script>
         <script type="text/javascript" th:src="@{/js/common_modal.js}"></script>
         <script type="text/javascript">

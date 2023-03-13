@@ -336,52 +336,36 @@
 
 
                             <div sec:authorize="isAuthenticated()" class="py-4 border">
-                                <form> <!-- th:action="@{/pedido-cotizacion}" -->
+                                <form id="myForm" method="post" action="/crear-pedido-cotizacion">
+                                    <!-- your form inputs go here -->
                                     <p>Cantidad para el pedido:</p>
-                                    <input type="radio" id="opcion1" name="opcion" value="1">
-                                    <label for="opcion1">70 millares</label><br>
-                                    <input type="radio" id="opcion2" name="opcion" value="2">
-                                    <label for="opcion2">50 millares</label><br>
-                                    <input type="radio" id="opcion3" name="opcion" value="3">
-                                    <label for="opcion3">100 millares</label><br>
-                                    <p>Otra cantidad:</p> <input type="number" id="otraOpcion" value="otraOpcion">
-                                    <div class="py-4"> 
-                                        <input type="submit" value="Generar pedido">
-                                    </div>
-                                    <div class="py-4"> 
-                                    </div>
+                                    <input type="radio" id="opcion1" name="cantidadPedido" value="70">
+                                    <label for="opcion1">70</label><br>
+                                    <input type="radio" id="opcion2" name="cantidadPedido" value="50">
+                                    <label for="opcion2">50</label><br>
+                                    <input type="radio" id="opcion3" name="cantidadPedido" value="100">
+                                    <label for="opcion3">100</label><br>
+                                    <p>Otra cantidad:</p>
+                                    <input type="number" id="otraOpcion" name="cantidadPedido" value="">
+                                    <input class="my-3" id="myButton" type="submit" value="Hacer pedido">
                                 </form>
+
                             </div>
                             <div sec:authorize="!isAuthenticated()" class="form-class">
-                                <p>Cantidad para el pedido:</p>
-                                <input type="radio" id="opcion1" name="opcion" value="1">
-                                <label for="opcion1">70</label><br>
-                                <input type="radio" id="opcion2" name="opcion" value="2">
-                                <label for="opcion2">50</label><br>
-                                <input type="radio" id="opcion3" name="opcion" value="3">
-                                <label for="opcion3">100</label><br>
-                                <p>Otra cantidad:</p> <input type="number" id="otraOpcion" value="otraOpcion">
-                                <div class="py-4"> 
-                                    <input type="submit" value="Iniciar sesión y generar pedido">
-                                </div>
 
+
+                                <form id="myForm">
+                                    <label class="py-3" style="color: #064059">Para realizar un pedido inicia sesión
+                                        <a class="nav-link" th:href="@{/login}" id="aNav"><i class="fas fa-solid fa-user" style="color: #20B2E5"></i></a>
+                                    </label>
+                                </form>
 
                             </div>
-
-
-                            <form id="myForm">
-                                <!-- your form inputs go here -->
-                                <input id="myButton" type="submit" value="Send Values">
-                            </form>
 
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
 
 
             <footer id="footer">
@@ -405,34 +389,39 @@
 
 
                 function sendValues() {
-                    var tds = document.querySelectorAll("#myTable td");
-                    var values = [];
-                    for (var i = 0; i < tds.length; i++) {
-                        values.push(tds[i].innerText);
-                    }
+  var tds = document.querySelectorAll("#myTable td");
+  var values = [];
+  for (var i = 0; i < tds.length; i++) {
+    values.push(tds[i].innerText);
+  }
 
-                    var data = values;
+  var cantidadPedido = document.querySelector('input[name="cantidadPedido"]:checked')?.value || document.getElementById('otraOpcion').value;
+  
+  // Agregar el valor al final del arreglo
+  values.push(cantidadPedido);
 
+  var data = values;
 
-                    $.ajax({
-                        type: 'POST',
-                        url: 'http://localhost/iudc/crear-pedido-cotizacion',
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader(csrfHeaderName, csrfValue);
-                        },
-                        data: JSON.stringify(data),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "text"
-                    }).done(function (response) {
-                        // handle success response from controller
-                        alert("Datos enviados");
-                     window.location.href = "/iudc/pedido-cotizacion";
-                     //$("#divPedidoCotizacion").html(response);
-                    }).fail(function (xhr, status, error) {
-                        // handle error response from controller
-                        alert("Error " + status + xhr);
-                    });
-                }
+  $.ajax({
+    type: 'POST',
+    url: 'http://localhost/iudc/crear-pedido-cotizacion',
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader(csrfHeaderName, csrfValue);
+    },
+    data: JSON.stringify(data),
+    contentType: "application/json; charset=utf-8",
+    dataType: "text"
+  }).done(function (response) {
+    // handle success response from controller
+    alert("Datos enviados");
+    window.location.href = "/iudc/pedido-cotizacion";
+    //$("#divPedidoCotizacion").html(response);
+  }).fail(function (xhr, status, error) {
+    // handle error response from controller
+    alert("Error " + status + xhr);
+  });
+}
+
 
             </script>
 
