@@ -26,7 +26,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -34,8 +33,6 @@ public class PedidoDeCotizacionController {
 
     @Autowired
     private SettingService settingService;
-    @Autowired
-    private CheckoutService checkoutService;
     @Autowired
     private ControllerHelper controllerHelper;
     @Autowired
@@ -45,15 +42,9 @@ public class PedidoDeCotizacionController {
     @Autowired
     private ShoppingCartService cartService;
     @Autowired
-    private OrderService orderService;
-    @Autowired
-    private PayPalService paypalService;
-    @Autowired
     private CotizadorService cotizadorService;
-    @Autowired
-    private CheckoutController checkoutController;
-    @Autowired
-    private ShoppingCartRestController shoppingCartController;
+    
+    
 
     
     @GetMapping("/pedido-cotizacion")

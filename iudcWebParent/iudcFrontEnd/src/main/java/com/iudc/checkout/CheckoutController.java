@@ -28,6 +28,7 @@ import com.iudc.common.entity.Customer;
 import com.iudc.common.entity.ShippingRate;
 import com.iudc.common.entity.order.Order;
 import com.iudc.common.entity.order.PaymentMethod;
+import com.iudc.common.entity.product.ProductoCotizador;
 import com.iudc.order.OrderService;
 import com.iudc.setting.CurrencySettingBag;
 import com.iudc.setting.EmailSettingBag;
@@ -35,6 +36,7 @@ import com.iudc.setting.PaymentSettingBag;
 import com.iudc.setting.SettingService;
 import com.iudc.shipping.ShippingRateService;
 import com.iudc.shoppingcart.ShoppingCartService;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class CheckoutController {
@@ -109,6 +111,43 @@ public class CheckoutController {
 		
 		return "checkout/order_completed";
 	}
+        
+        public String placeOrderCotizacion(HttpServletRequest request,HttpSession session) 
+			throws UnsupportedEncodingException, MessagingException {
+		String paymentType = request.getParameter("paymentMethod");
+		PaymentMethod paymentMethod = PaymentMethod.valueOf(paymentType);
+		
+		Customer customer = controllerHelper.getAuthenticatedCustomer(request);
+		
+                ProductoCotizador productoCotizacion = (ProductoCotizador) session.getAttribute("productoCotizacion");
+                
+                Address defaultAddress = addressService.getDefaultAddress(customer);
+		ShippingRate shippingRate = null;
+		
+		if (defaultAddress != null) {
+			shippingRate = shipService.getShippingRateForAddress(defaultAddress);
+		} else {
+			shippingRate = shipService.getShippingRateForCustomer(customer);
+		}
+                
+                double totalPedido = productoCotizacion.getCantidadPedido() * productoCotizacion.getPrecioMillar();
+                double precioPorMillar = productoCotizacion.getPrecioMillar();
+                double costoEnvio = 350.5;
+
+                //NO ES NECESARIO UN CART ITEM PORQUE SE HACE DIRECTO
+		//List<CartItem> cartItems = cartService.listCartItems(customer);
+		
+                CheckoutInfo checkoutInfo = checkoutService.prepareCheckoutCotizacion(precioPorMillar, totalPedido, costoEnvio, shippingRate);
+		
+                //Order createdOrder = orderService.createOrder(customer, defaultAddress, cartItems, paymentMethod, checkoutInfo);
+                //CAMBIAR AQUI COMO SE CREA ESTA ORDEN , TIPO COTIZACION, NO NECESITO CARTITEMS
+		Order createdOrder = orderService.createOrderCotizacion(customer, defaultAddress, paymentMethod, checkoutInfo, productoCotizacion);
+		//cartService.deleteByCustomer(customer);
+		sendOrderConfirmationEmail(request, createdOrder);
+		
+		return "checkout/order_completed";
+	}
+        
 
 	private void sendOrderConfirmationEmail(HttpServletRequest request, Order order) 
 			throws UnsupportedEncodingException, MessagingException {
@@ -170,6 +209,35 @@ public class CheckoutController {
 		model.addAttribute("message", message);
 		
 		return "message";
-	}      
+	}
+        
+        	
+	@PostMapping("/process_paypal_order_cotizacion")
+	public String processPayPalOrderCotizacion(HttpServletRequest request, HttpSession session,Model model) 
+			throws UnsupportedEncodingException, MessagingException {
+		String orderId = request.getParameter("orderId");
+		
+		String pageTitle = "Checkout Failure";
+		String message = null;
+		
+		try {
+			if (paypalService.validateOrder(orderId)) {
+				return placeOrderCotizacion(request, session);
+			} else {
+				pageTitle = "Checkout Failure";
+				message = "ERROR: La transacción no pudo ser completada porque la información de la orden no es valida.";
+			}
+		} catch (PayPalApiException e) {
+			message = "ERROR: Transacción fallo debido al error: " + e.getMessage();
+		}
+		
+		model.addAttribute("pageTitle", pageTitle);
+		model.addAttribute("title", pageTitle);
+		model.addAttribute("message", message);
+		
+		return "message";
+	}
+        
+        
         
 }

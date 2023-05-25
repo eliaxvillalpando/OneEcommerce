@@ -19,7 +19,7 @@ public class ShoppingCartService {
 	@Autowired private CartItemRepository cartRepo;
 	@Autowired private ProductRepository productRepo;
 	
-	public Integer addProduct(Integer productId, Integer quantity, Customer customer) 
+	public Integer addProduct(Integer productId, Integer quantity, Customer customer)
 			throws ShoppingCartException {
 		Integer updatedQuantity = quantity;
 		Product product = new Product(productId);

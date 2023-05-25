@@ -2,6 +2,7 @@ package com.iudc.common.entity.product;
 
 import com.iudc.common.entity.IdBasedEntity;
 import com.iudc.common.entity.order.OrderStatus;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "prodCotizador")
-public class ProductoCotizador extends IdBasedEntity{
+public class ProductoCotizador extends IdBasedEntity implements Serializable{
     
     private Date orderTime;
     //nullable = false
@@ -200,6 +201,11 @@ public class ProductoCotizador extends IdBasedEntity{
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductoCotizador{" + "medidas=" + medidas + '}';
     }
     
     

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
   
-	
 	@GetMapping("/login")
 	public String viewLoginPage() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -19,7 +18,4 @@ public class MainController {
 		
 		return "redirect:/";
 	}
-        
-        
-        
 }

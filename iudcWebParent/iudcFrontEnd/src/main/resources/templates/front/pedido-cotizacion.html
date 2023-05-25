@@ -36,7 +36,7 @@
 
                     <div class="card-body">
                         <div id="paypal-button-container"></div>
-                        <form th:action="@{/process_paypal_order}" method="post" id="paypalForm">
+                        <form th:action="@{/process_paypal_order_cotizacion}" method="post" id="paypalForm">
                             <input type="hidden" name="orderId" id="orderId" />
                             <input type="hidden" name="paymentMethod" value="PAYPAL" />
                         </form>

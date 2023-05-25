@@ -13,101 +13,123 @@ import com.iudc.common.entity.product.ProductoCotizador;
 @Entity
 @Table(name = "order_details")
 public class OrderDetail extends IdBasedEntity {
-	private int quantity;
-	private float productCost;
-	private float shippingCost;
-	private float unitPrice;
-	private float subtotal;
-	
-	@ManyToOne
-	@JoinColumn(name = "product_id")
-	private Product product;
-	
-	@ManyToOne
-	@JoinColumn(name = "order_id")
-	private Order order;
-        
-        //Modificacion para usar trazabilidad de order_details con productos del cotizador
-        @ManyToOne
-        @JoinColumn(name = "cotizador_codigo", referencedColumnName = "codigoCotizacion")
-        private ProductoCotizador productoCotizador;
-        
-	
-	public OrderDetail() {
-	}
 
-	public OrderDetail(String categoryName, int quantity, float productCost, float shippingCost, float subtotal) {
-		this.product = new Product();
-		this.product.setCategory(new Category(categoryName));
-		this.quantity = quantity;
-		this.productCost = productCost;
-		this.shippingCost = shippingCost;
-		this.subtotal = subtotal;
-	}
-	
-	public OrderDetail(int quantity, String productName, float productCost, float shippingCost, float subtotal) {
-		this.product = new Product(productName);
-		this.quantity = quantity;
-		this.productCost = productCost;
-		this.shippingCost = shippingCost;
-		this.subtotal = subtotal;
-	}	
+    private int quantity;
+    private float productCost;
+    private float shippingCost;
+    private float unitPrice;
+    private float subtotal;
 
-	public int getQuantity() {
-		return quantity;
-	}
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-	public float getProductCost() {
-		return productCost;
-	}
+    //Modificacion para usar trazabilidad de order_details con productos del cotizador
+    @ManyToOne
+    @JoinColumn(name = "cotizador_codigo", referencedColumnName = "codigoCotizacion")
+    private ProductoCotizador productoCotizador;
 
-	public void setProductCost(float productCost) {
-		this.productCost = productCost;
-	}
+    public OrderDetail() {
+    }
 
-	public float getShippingCost() {
-		return shippingCost;
-	}
+    public OrderDetail(String categoryName, int quantity, float productCost, float shippingCost, float subtotal) {
+        this.product = new Product();
+        this.product.setCategory(new Category(categoryName));
+        this.quantity = quantity;
+        this.productCost = productCost;
+        this.shippingCost = shippingCost;
+        this.subtotal = subtotal;
+    }
 
-	public void setShippingCost(float shippingCost) {
-		this.shippingCost = shippingCost;
-	}
+    public OrderDetail(int quantity, String productName, float productCost, float shippingCost, float subtotal) {
+        this.product = new Product(productName);
+        this.quantity = quantity;
+        this.productCost = productCost;
+        this.shippingCost = shippingCost;
+        this.subtotal = subtotal;
+    }
 
-	public float getUnitPrice() {
-		return unitPrice;
-	}
+    public OrderDetail(Order get) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-	public void setUnitPrice(float unitPrice) {
-		this.unitPrice = unitPrice;
-	}
+    public int getQuantity() {
+        return quantity;
+    }
 
-	public float getSubtotal() {
-		return subtotal;
-	}
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-	public void setSubtotal(float subtotal) {
-		this.subtotal = subtotal;
-	}
+    public float getProductCost() {
+        return productCost;
+    }
 
-	public Product getProduct() {
-		return product;
-	}
+    public void setProductCost(float productCost) {
+        this.productCost = productCost;
+    }
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+    public float getShippingCost() {
+        return shippingCost;
+    }
 
-	public Order getOrder() {
-		return order;
-	}
+    public void setShippingCost(float shippingCost) {
+        this.shippingCost = shippingCost;
+    }
 
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-	
-	
+    public float getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(float unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public float getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(float subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public ProductoCotizador getProductoCotizador() {
+        return productoCotizador;
+    }
+
+    public void setProductoCotizador(ProductoCotizador productoCotizador) {
+        this.productoCotizador = productoCotizador;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" + "productoCotizador=" + productoCotizador + '}';
+    }
+
+    
+
+  
+    
+    
+
 }

@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.iudc.common.entity.product.Product;
+import com.iudc.common.entity.product.ProductoCotizador;
 
 @Entity
 @Table(name = "cart_items")
@@ -19,6 +20,11 @@ public class CartItem extends IdBasedEntity {
 	@ManyToOne
 	@JoinColumn(name = "product_id")	
 	private Product product;
+        
+        /*
+        @ManyToOne
+	@JoinColumn(name = "prodcot_id")
+	private ProductoCotizador prodCot;*/
 	
 	private int quantity;
 	

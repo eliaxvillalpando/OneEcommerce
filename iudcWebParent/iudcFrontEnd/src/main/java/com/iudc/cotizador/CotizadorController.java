@@ -148,7 +148,7 @@ public class CotizadorController {
         multipart.addBodyPart(htmlPart);
         multipart.addBodyPart(imagePart);
 
-        helper.setSubject("Cotización Impresores Unidos del Centro");
+        helper.setSubject("Cotización");
         helper.setTo(recipient);
 
         mail.setContent(multipart);

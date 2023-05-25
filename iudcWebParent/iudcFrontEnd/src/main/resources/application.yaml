@@ -1,13 +1,13 @@
 server:
   port: 80
   servlet:
-    context-path: /iudc    
+    context-path: /enterprise
 spring:
   datasource:
-    password: mydb2021;*
-    url: jdbc:mysql://localhost:3306/iudc_wf?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-  
+    password: 
+    url: 
+    username: 
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -16,20 +16,39 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
     show-sql: true
-        
+
   security:
     oauth2:
       client:
+        provider:
+          linkedin:
+            client-secret: 
+            authorization-uri: https://www.linkedin.com/oauth/v2/authorization
+            token-uri: https://www.linkedin.com/oauth/v2/accessToken
+            user-info-uri:
+            user-name-attribute: id
+            email-attribute: emailAddress
+            firstName-attribute: localizedFirstName
+            lastName-attribute: localizedLastName
         registration:
           google:
-            client-id: 1049851842388-hms32ne3m7bbd0m082h9jdioph69qhk1.apps.googleusercontent.com
-            client-secret: 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
+            client-id: 
+            client-secret: 
             scope:
             - email
             - profile
-    facebook:
-            client-id: 489168046262013
-            client-secret: a6bab8169103c5266ebae0450e51a277
+          facebook:
+            client-id: 
+            client-secret: 
             scope:
             - email
             - public_profile
+          linkedin:
+            client-id: 
+            scope:
+              - r_emailaddress
+              - r_liteprofile
+            authorization-grant_type: authorization_code
+            code: string
+            response_type: code
+            redirect-uri:

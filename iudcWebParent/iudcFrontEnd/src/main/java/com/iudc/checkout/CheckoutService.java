@@ -67,4 +67,26 @@ public class CheckoutService {
 		
 		return cost;
 	}
+        
+        public CheckoutInfo prepareCheckoutCotizacion(double productCostCotizador, double productTotalCotizador, double shippingCostTotalCotizador, ShippingRate shippingRate) {
+		CheckoutInfo checkoutInfo = new CheckoutInfo();
+		
+		float productCost = (float) productCostCotizador;
+		float productTotal = (float) productTotalCotizador;
+                float shippingCostTotal = (float) shippingCostTotalCotizador;
+		float paymentTotal = productTotal + shippingCostTotal;
+                
+		
+		checkoutInfo.setProductCost(productCost);
+		checkoutInfo.setProductTotal(productTotal);
+		checkoutInfo.setShippingCostTotal(shippingCostTotal);
+		checkoutInfo.setPaymentTotal(paymentTotal);
+		
+		checkoutInfo.setDeliverDays(15);
+		checkoutInfo.setCodSupported(shippingRate.isCodSupported());
+		
+		return checkoutInfo;
+	}
+        
+        
 }
